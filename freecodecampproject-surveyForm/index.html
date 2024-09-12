@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1 id="title">Student Registration Form</h1>
+    <p id="description">Please ensure you fill in the form properly</p>
+    <form action="https://register-demo.freecodecamp.org" method="post" id="survey-form" autocomplete="on">
+            <label for="name" id="name-label"> Name </label><input type="text" name="fname" id="name" placeholder="please input your name" required />
+            <label for="email" id="email-label"> Email </label> <input type="email" name="email" id="email" placeholder="please input your email" required />
+            <label for="number" id="number-label"> Age<small>(optional)</small> </label> <input type="number" name="age" id="number" min="12" max="100" placeholder="age" />
+        
+
+            <label for="dropdown">choose your faculty: </label>
+            <select name="faculty" id="dropdown">
+                <option value="select faculty">Select faculty</option>
+                <option value="science">Science</option>
+                <option value="social science">Social science</option>
+                <option value="art">Art</option>
+                <option value="medicine">Medicine</option>
+                <option value="accounting">Accounting</option>
+                <option value="education">Education</option>
+                <option value="others">Others</option>
+            </select>
+            <label for="question-answer">Would you recommend our school to your friends?</label>
+            <input type="radio" name="answer" id="definitely" value="DEFINITELY" checked> <label for="definitely" class="radio-label">Definitely</label>
+            <input type="radio" name="answer" id="maybe" value="MAYBE"> <label for="maybe" class="radio-label" >Maybe</label>
+            <input type="radio" name="answer" id="notsure" value="NOTSURE"> <label for="notsure" class="radio-label">Not sure</label>
+
+            <label for="dropdown">What is the best way for you to learn?</label>
+            <select name="options" id="dropdown">
+                <option value="select a option">Select an option</option>
+                <option value="challenges">Class</option>
+                <option value="projects">Projects</option>
+                <option value="community">Community</option>
+                <option value="open-source">Open source</option>
+            </select>
+        
+
+            <label for="improvement">What would you like to see improved? <small>(check all that apply)</small></label>
+            <input type="checkbox" name="department" id="department" value="DEPARTMENT"><label class="checkbox-label" for="department"> Department</label>
+            <input type="checkbox" name="class" id="class" value="CLASSES"><label class="checkbox-label" for="class"> Classes</label>
+            <input type="checkbox" name="library" id="library" value="LIBRARY"><label class="checkbox-label" for="library">Library</label>
+            <input type="checkbox" name="laboratory" id="laboratory" value="LABORATORY"><label class="checkbox-label" for="laboratory"> Laboratory</label>
+            <input type="checkbox" name="data-visualisation" id="data-visualisation" value="DATA-VISUALISATION"><label class="checkbox-label" for="data-visualization"> Data visualization</label>
+            <input type="checkbox" name="open-source" id="open-source" value="OPEN-SOURCE"><label class="checkbox-label" for="open-source"> Open source</label>
+            <input type="checkbox" name="gathering" id="gathering" value="GATHERINGS"><label class="checkbox-label" for="gathering"> Gatherings</label>
+            <input type="checkbox" name="aracade" id="arcade" value="ARCADES"><label class="checkbox-label" for="arcade"> Arcades</label>
+            <input type="checkbox" name="theather" id="theather" value="THEATHER"><label class="checkbox-label" for="theather"> Theather</label>
+
+            <hr/>
+            <label for="comments-suggestions">Any comments or suggestions?</label>
+            <textarea name="message" id="comments-suggestions" cols="30" rows="4"> Enter your comment here...
+            </textarea>
+        
+        <input type="submit" id="submit" value="Submit">
+    </form>
+</body>
+</html>
