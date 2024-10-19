@@ -1,0 +1,243 @@
+This CSS code defines the styles for a personal portfolio website. Below is a breakdown of each section, its functionality, and its usage within the project:
+
+### 1. **Importing Fonts**
+```css
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+```
+- **What it does**: This line imports the "Poppins" font from Google Fonts. It's a clean, modern sans-serif typeface often used in web development for its readability.
+- **Usage**: The imported font will be applied throughout the website, making the text more visually appealing and consistent.
+
+---
+
+### 2. **CSS Variables (Custom Properties)**
+```css
+:root {
+    --main-white: #f0f0f0;
+    --main-red: linear-gradient(to right, #007bff, #00c0ff); /* Cool blue gradient */
+    --main-blue: #45567d;
+    --main-gray: #303841;
+}
+```
+- **What it does**: These lines define reusable variables (CSS custom properties) within the `:root` scope, which makes them accessible globally.
+    - `--main-white`: A light grayish white color.
+    - `--main-red`: A linear gradient transitioning from a vibrant blue to a lighter cyan.
+    - `--main-blue`: A dark blue shade used for elements.
+    - `--main-gray`: A darker gray, giving a modern, neutral look.
+- **Usage**: These variables are used throughout the site to maintain consistency in color schemes. Instead of hard-coding color values, variables make it easier to manage and update colors across the project.
+
+---
+
+### 3. **Global Styles**
+```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5;
+    color: var(--main-white);
+}
+```
+- **What it does**:
+    - The `*` selector applies a reset by removing default margins and paddings from all elements, ensuring consistent spacing across browsers.
+    - `box-sizing: border-box`: Ensures padding and borders are included in the element's total width/height.
+    - `body`: Sets the `Poppins` font, ensures readable line spacing (`line-height`), and applies the `--main-white` color for text.
+- **Usage**: These rules establish a clean base to ensure layout consistency and style uniformity throughout the site.
+
+---
+
+### 4. **Header and Navigation**
+```css
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--main-red);
+    z-index: 10;
+}
+
+#navbar ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+}
+
+#navbar li {
+    padding: 1rem;
+}
+
+#navbar a {
+    color: var(--main-white);
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease-out;
+}
+
+#navbar a:hover {
+    color: var(--main-gray);
+}
+```
+- **What it does**:
+    - `header`: Fixes the header at the top of the viewport with full width, ensuring it stays in view when scrolling. The background is a gradient (`--main-red`), and `z-index: 10` ensures it stays on top of other elements.
+    - `#navbar ul`: The navigation list is displayed as a horizontal flexbox (`display: flex`), aligned to the right (`justify-content: flex-end`).
+    - `#navbar a`: The links are styled with white text (`--main-white`), no underline (`text-decoration: none`), and a smooth color change on hover.
+- **Usage**: This section styles the website’s navigation bar, making it fixed and accessible as the user scrolls.
+
+---
+
+### 5. **Welcome Section**
+```css
+#welcome-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, #1e272e, #38444d);
+}
+
+#welcome-section h1 {
+    font-size: 4rem;
+    font-weight: 700;
+}
+
+#welcome-section p {
+    font-size: 2rem;
+    font-weight: 200;
+    font-style: italic;
+    color: var(--main-red);
+}
+```
+- **What it does**:
+    - `#welcome-section`: The section uses Flexbox to center its content both horizontally and vertically. It spans the full height of the viewport (`height: 100vh`) and uses a dark, moody gradient for the background.
+    - `h1`: Large, bold title to create a strong visual impact.
+    - `p`: Subtle, italicized description text, with the `--main-red` gradient color applied.
+- **Usage**: This section serves as the hero area, where the user's name and role (e.g., "web developer") are displayed prominently.
+
+---
+
+### 6. **Projects Section**
+```css
+#projects {
+    text-align: center;
+    padding: 10rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: auto;
+}
+```
+- **What it does**: 
+    - This section applies a gradient background and centers the text. The padding ensures enough space around the content for a balanced layout.
+    - The `projects-grid` further structures individual project tiles:
+```css
+.projects-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 6rem auto;
+}
+```
+- **What it does**:
+    - `flex-wrap: wrap`: Allows project tiles to wrap onto new lines when they don't fit in a single row.
+    - `gap`: Provides space between the project tiles.
+    - `max-width: 1200px`: Ensures the grid has a maximum width, keeping it centered and well-proportioned.
+
+- The project tiles themselves:
+```css
+.project-tile {
+    flex-basis: calc(33.333% • 2rem);
+    background: var(--main-gray);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease-out;
+}
+.project-tile:hover {
+    transform: translateY(-8px);
+}
+```
+- **What it does**:
+    - `flex-basis`: Each project tile occupies roughly one-third of the available width (adjustable based on screen size).
+    - `box-shadow`: Adds subtle depth with a shadow effect.
+    - `transform`: Applies a slight lift effect when the tile is hovered over, creating an interactive feel.
+- **Usage**: The `projects-grid` and `project-tile` styles display project screenshots in an organized grid, with hover animations to enhance user interaction.
+
+---
+
+### 7. **Buttons**
+```css
+.btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 2px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--main-white);
+    background: var(--main-gray);
+    transition: background 0.3s ease-out;
+}
+
+.btn:hover {
+    background: var(--main-red);
+}
+
+.btn-icon {
+    margin-left: 10px;
+    transition: transform 0.3s ease-out;
+}
+
+.btn:hover .btn-icon {
+    transform: translateX(5px);
+}
+```
+- **What it does**:
+    - `btn`: Defines a reusable button class, styled with padding, background color, and hover effects.
+    - `btn:hover`: Changes the background color to the `--main-red` gradient on hover.
+    - `.btn-icon`: Moves the button's icon to the right on hover (`translateX(5px)`), adding a subtle interactive animation.
+- **Usage**: These buttons are used for the "Show all" link and other interactive elements across the site.
+
+---
+
+### 8. **Contact Section**
+```css
+#contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 80vh;
+    padding: 0 2rem;
+    background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+}
+```
+- **What it does**:
+    - `#contact`: Sets up a vertical Flexbox for aligning the contact form elements centrally within the viewport.
+    - The background is a soft, pastel gradient that contrasts with the other sections of the site.
+- **Usage**: This section is dedicated to contact details and links to social profiles, maintaining a light, welcoming aesthetic.
+
+---
+
+### 9. **Media Queries**
+```css
+@media (max-width: 1200px) {
+    .project-tile {
+        flex-basis: calc(50% • 2rem);
+    }
+}
+```
+- **What it does**:
+    - The media queries adjust the layout for smaller screens, ensuring the design is responsive. When the viewport width is less than 1200px, each project tile takes up
+
+ half the screen instead of one-third.
+- **Usage**: This ensures the website remains functional and aesthetically pleasing on both large and small devices.
+
+---
+
+These styles work together to create a cohesive, modern portfolio website.
