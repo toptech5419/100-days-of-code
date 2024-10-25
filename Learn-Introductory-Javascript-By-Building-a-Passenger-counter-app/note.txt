@@ -1,0 +1,61 @@
+### Explanation of the JavaScript Code for the Passenger Counter App
+
+The JavaScript code in this passenger counter app interacts with the HTML elements to create a dynamic, functional counter that keeps track of the number of passengers and saves previous entries.
+
+#### Breakdown of the JavaScript Code
+
+1. **Variable Declarations:**
+
+   ```js
+   let saveEl = document.getElementById('save-el');
+   let count = 0;
+   let passengerCount = document.getElementById('passenger-count');
+   ```
+
+   - **`saveEl`**: This variable stores a reference to the HTML element with the `id` `save-el`. It's a `<p>` tag that displays the saved counts of passengers (previous entries).
+   - **`count`**: This is a number variable that tracks the current number of passengers. Initially, it is set to `0`.
+   - **`passengerCount`**: This variable stores a reference to the HTML element with the `id` `passenger-count`, which is a `<div>` where the current count of passengers is displayed.
+
+2. **Function to Increase Passenger Count:**
+
+   ```js
+   function increasePassenger() {
+       count++;
+       passengerCount.textContent = count;
+   }
+   ```
+
+   - **`increasePassenger()`**: This function is triggered when the "Increase" button is clicked. It does the following:
+     - **`count++`**: Increments the `count` variable by 1. This increases the passenger count every time the button is clicked.
+     - **`passengerCount.textContent = count;`**: Updates the displayed number of passengers in the `<div>` element with `id="passenger-count"`. It sets the content of this element to the updated `count` value, so the user sees the current number of passengers on the screen.
+
+3. **Function to Save the Current Passenger Count:**
+
+   ```js
+   function save() { 
+       let countStr = count + " - ";
+       saveEl.textContent += countStr;
+       passengerCount.textContent = 0;
+       count = 0;
+   }
+   ```
+
+   - **`save()`**: This function is triggered when the "Save" button is clicked. It does the following:
+     - **`let countStr = count + " - ";`**: Converts the current `count` value into a string, appending `" - "` to separate saved values when displayed. For example, if the current count is `5`, `countStr` becomes `"5 - "`.
+     - **`saveEl.textContent += countStr;`**: Adds the `countStr` to the existing text in the `saveEl` element. This updates the list of previous entries. Each saved entry is displayed as `"x - "` where `x` is the passenger count.
+     - **`passengerCount.textContent = 0;`**: Resets the displayed passenger count back to `0` after saving.
+     - **`count = 0;`**: Resets the `count` variable to `0`, so the next round of counting can start from zero.
+
+#### Interaction with HTML
+
+- **Buttons and Event Handlers**: 
+  - The "Increase" button has an `onclick` attribute that calls the `increasePassenger()` function when clicked, which increases the passenger count.
+  - The "Save" button has an `onclick` attribute that calls the `save()` function, which saves the current count and resets it.
+
+#### Key Takeaways
+
+- The `increasePassenger()` function handles the logic for increasing and updating the passenger count.
+- The `save()` function saves the current count and resets the display for the next round of counting.
+- `textContent` is used to update the visual display of the count and saved entries dynamically in the HTML elements.
+
+This simple but effective structure demonstrates core JavaScript functionality, such as manipulating the DOM (Document Object Model) and handling user events (button clicks).
