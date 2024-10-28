@@ -1,0 +1,45 @@
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', Arial, sans-serif;
+    background-image: url(https://t3.ftcdn.net/jpg/00/88/98/18/240_F_88981880_YjJManMJ6hJmKr5CZteFJAkEzXIh8mxW.jpg);
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    background-size: cover;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    color:black;
+    text-decoration: underline;
+}
+
+#message-el {
+    font-style: italic;
+    font-size: 20px;
+    font-weight: bold;
+    color: #04120a;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+button {
+    color: #04120a;
+    width: 150px;
+    background: goldenrod;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+    margin-bottom: 2px;
+    margin-top: 2px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#player-el {
+    color: rgb(0, 128, 0);
+}
+
+#cards-el, #sum-el {
+    color: rgb(0, 0, 255);
+}
