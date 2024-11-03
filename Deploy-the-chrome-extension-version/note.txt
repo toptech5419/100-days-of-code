@@ -1,0 +1,121 @@
+This JavaScript code is designed to manage and display a list of URLs (referred to as "leads") in the browser. It allows users to save links either by entering them manually, saving the current browser tab's URL, or deleting all saved links. Let’s break down the functionality, explaining key parts, structures, and why they’re arranged as they are.
+
+---
+
+### Key Components of the JavaScript Code
+
+1. **Variables and Constants**:
+    - `let myLeads = []`: Initializes an empty array `myLeads` to store all the saved URLs.
+    - `const inputEl`, `inputBtn`, `ulEl`, `deleteBtn`, `tabBtn`: These are DOM references created by using `document.getElementById`. Each represents an element in the HTML, making it accessible within JavaScript for manipulation.
+
+2. **Loading Saved Leads from Local Storage**:
+    ```javascript
+    const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
+    if (leadsFromLocalStorage) {
+        myLeads = leadsFromLocalStorage;
+        render(myLeads);
+    }
+    ```
+   - `localStorage.getItem("myLeads")` retrieves the saved leads from `localStorage` (if any). Since `localStorage` stores everything as a string, `JSON.parse()` is used to convert this stored string back into an array format.
+   - If there are saved leads, the code updates `myLeads` with these values and calls the `render` function to display them in the browser.
+
+3. **Render Function**:
+    ```javascript
+    function render(leads) {
+        let listItems = "";
+        for (let i = 0; i < leads.length; i++) {
+            listItems += `
+                <li>
+                    <a target='_blank' href='${leads[i]}'>
+                        ${leads[i]}
+                    </a>
+                </li>
+            `;
+        }
+        ulEl.innerHTML = listItems;
+    }
+    ```
+   - This function generates HTML for each lead in the `myLeads` array.
+   - `for` loop iterates over the `leads` array and constructs an HTML list item (`<li>`) with an anchor tag (`<a>`) for each lead.
+   - `innerHTML` is used to inject the constructed HTML (`listItems`) into the `<ul>` element on the page. This approach allows the list of URLs to display as clickable links.
+
+---
+
+### Event Listeners and Their Functions
+
+1. **Saving the Current Tab URL**:
+    ```javascript
+    tabBtn.addEventListener("click", function () {    
+        chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            myLeads.push(tabs[0].url);
+            localStorage.setItem("myLeads", JSON.stringify(myLeads));
+            render(myLeads);
+        });
+    });
+    ```
+   - This function listens for a click on the "SAVE TAB" button.
+   - `chrome.tabs.query` is a Chrome API function that fetches the currently active tab in the browser. The URL of this tab is then pushed into `myLeads`.
+   - The updated array is stored in `localStorage` by converting `myLeads` to a string format using `JSON.stringify()`.
+   - `render(myLeads)` updates the displayed list with the new URL.
+
+2. **Deleting All Leads**:
+    ```javascript
+    deleteBtn.addEventListener("click", function () {
+        localStorage.clear();
+        myLeads = [];
+        render(myLeads);
+    });
+    ```
+   - This function listens for a click on the "DELETE ALL" button.
+   - `localStorage.clear()` removes all data associated with `myLeads` from the browser’s `localStorage`.
+   - `myLeads` is reset to an empty array, and `render(myLeads)` updates the display by clearing the list in the HTML.
+
+3. **Adding Leads via Button Click and “Enter” Key**:
+    - **Button Click**:
+      ```javascript
+      inputBtn.addEventListener("click", function () {
+          addLead();
+      });
+      ```
+      - When "SAVE INPUT" is clicked, `addLead()` is called to save the URL in the input field.
+
+    - **Enter Key**:
+      ```javascript
+      inputEl.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+              addLead();
+          }
+      });
+      ```
+      - This listens for the `Enter` key press when the input field is focused. If `Enter` is pressed, `addLead()` is called, allowing users to add leads quickly.
+
+---
+
+### `addLead` Function
+
+```javascript
+function addLead() {
+    const inputValue = inputEl.value.trim();
+    if (inputValue) {
+        myLeads.push(inputValue);
+        inputEl.value = "";
+        localStorage.setItem("myLeads", JSON.stringify(myLeads));
+        render(myLeads);
+    }
+}
+```
+
+- **`const inputValue = inputEl.value.trim();`**: This captures the URL entered in the input field, with `trim()` removing any extra whitespace.
+- **Validation**: It only proceeds if `inputValue` is not empty (i.e., a valid URL was entered).
+- **Update and Storage**: The URL is pushed to `myLeads`, `localStorage` is updated, and the `render` function is called to update the list on the page.
+
+---
+
+### Why This Code is Structured This Way
+
+- **Readability**: Variables and constants are declared at the top, making it clear what elements and storage items are being used.
+- **Modularity**: Each function (`render`, `addLead`) is designed to handle a specific task, which improves code maintainability and reusability.
+- **Local Storage**: Using `localStorage` allows leads to persist even if the page is refreshed, making it a key part of this extension's functionality.
+- **Event-driven Design**: The code relies on event listeners to trigger functions based on user actions, which is essential for interactive applications. Each button and action (clicks, key presses) has a dedicated function, improving both control and flow.
+
+This setup ensures smooth functionality, keeping the code organized and efficient for the tasks it needs to perform.
