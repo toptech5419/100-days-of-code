@@ -1,0 +1,116 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    color: #333333;
+    font-family: 'Poppins', sans-serif;
+}
+
+body.contact-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+}
+
+.contact-form-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1000px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.contact-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    margin: 0 auto;
+}
+
+.contact-form-section form {
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0 0 10px;
+    text-align: center;
+    color: #222;
+}
+
+.contact-form-heading span {
+    color: #007000;
+}
+
+.contact-form-intro {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #666;
+}
+
+.contact-input, .contact-textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    background: #fefefe;
+}
+
+.contact-input:focus, .contact-textarea:focus {
+    border-color: #007000;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 112, 0, 0.5);
+}
+
+.contact-submit-button {
+    border: none;
+    padding: 12px 20px;
+    border-radius: 50px;
+    background-color: #007000;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.contact-submit-button:hover {
+    background-color: #005c00;
+}
+
+@media (min-width: 768px) {
+    .contact-form-section {
+        flex-wrap: nowrap;
+    }
+    
+    .contact-image {
+        max-width: 50%;
+    }
+    
+    .contact-form-section form {
+        max-width: 500px;
+    }
+}

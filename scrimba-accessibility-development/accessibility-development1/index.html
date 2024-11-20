@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Fonts & Icons -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+        <title>Skynet Eats - Grocery Delivery</title>
+    </head>
+    <body>
+        <!-- Navigation bar -->
+        <nav class="navbar">
+            <a class="skip-nav-link" href="#main">Skip to main content</a>
+            <div class="logo">
+                <span class="iconify icon" data-icon="healthicons:drone-outline"></span>
+                <p class="logo-text">Skyuber Eats</p>
+            </div>
+            <ul class="nav-links">
+                <li><a class="nav-link" href="index.html">Home</a></li>
+                <li><a class="nav-link" href="#">About</a></li>
+                <li><a class="nav-link" href="#">Contact</a></li>
+                <li><a class="nav-link" href="#">Sign up</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Main content -->
+        <main id="main">
+            <!-- Hero section -->
+            <section class="hero-section">
+                <img class="hero-image" src="https://img.freepik.com/free-vector/flat-monoline-geometric-logos-collection_23-2147713107.jpg?ga=GA1.1.1222273585.1726059893&semt=ais_hybrid" alt="Food delivery drone saying 'I come with peas'." />
+                <div>
+                    <h1 class="hero-heading">Skyuber <span>Eats</span></h1>
+                    <p class="hero-text">Grocery delivery straight to your... window!</p>
+                    <a class="hero-link" href="#">Order Now</a>
+                </div>
+            </section>
+    
+            <!-- Info section -->
+            <section class="info-section">
+                <div class="info">
+                    <img class="info-image" src="https://img.freepik.com/free-vector/realistic-drone-sky-illustration_1284-21853.jpg?t=st=1732073082~exp=1732076682~hmac=de65270ed67ba808abf36159185eef9d0c8366e2e8bff78423883f278151e75b&w=740" alt="A flying Skynet drone." />
+                    <h2 class="info-heading">Food Delivery Service</h2>
+                    <p>Is it a bird? Is it a plane? None of the above. It's a drone on its way to you with your tasty groceries! If you don’t want fast food, but you want your food fast, <a href="#">check out our partnered shops here</a>.</p>
+                </div>
+                <ul class="statistics">
+                    <li class="stat">
+                        <h3 class="stat-heading">Drones🤖</h3>
+                        <p class="stat-number">+4000</p>
+                    </li>
+                    <li class="stat">
+                        <h3 class="stat-heading">Customers🧑🏽</h3>
+                        <p class="stat-number">+120 000</p>
+                    </li>
+                    <li class="stat">
+                        <h3 class="stat-heading">Cat conflicts🐱</h3>
+                        <p class="stat-number">~70</p>
+                    </li>
+                </ul>
+            </section>
+        
+            <!-- About section -->
+            <section class="about-section">
+                <div class="about">
+                    <h2 class="about-heading">About <span>Us</span></h2>
+                    <p class="about-text">Skyuber was founded by Toptech, a true pioneer in the field of AI and robotics.🦾 Our purpose is to serve humans and we realized that we’re driving humans around, we’re walking their bio-pets, why not feed them too?</p>
+                    <p>If you want to know more, head over to our about page!</p>
+                    <div class="about-link">
+                        <a href="#">About Skyuber</a>
+                    </div>
+                </div>
+            </section>
+        
+            <!-- Form section -->
+            <section class="form-section">
+                <form>
+                    <h2 class="form-heading">What's Next?</h2>
+                    <p class="form-intro">Want pizza through your window?🍕 Recieve a notification when the service is available.</p>
+                    <label for="name">Full name</label>
+                    <input class="input" id="name" type="text" placeholder=" Tope Alabi" />
+                    <label for="email">Email</label>
+                    <input class="input" id="email" type="email" placeholder="Toptech.regular@gmail.com" />
+                    <button class="submit-button" type="button" onclick="submitForm()">Notify me</button>
+                </form>
+            </section>
+            
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <ul class="social-links">
+                <li><a class="social-link" href="#">
+                    <ion-icon class="icon" name="logo-facebook"></ion-icon>
+                    <p>Facebook</p>
+                </a><li>
+                <li><a class="social-link" href="#">
+                    <ion-icon class="icon" name="logo-instagram"></ion-icon>
+                    <p>Instagram</p>
+                </a><li>
+                <li><a class="social-link" href="#">
+                    <ion-icon class="icon" name="logo-linkedin"></ion-icon>
+                    <p>LinkedIn</p>
+                </a><li>
+                <li><a class="social-link" href="#">
+                    <ion-icon class="icon" name="logo-twitter"></ion-icon>
+                    <p>Twitter</p>
+                </a><li>
+            </ul>
+        </footer>
+        
+        <script src="index.js"></script>
+        <!-- The two scripts below import the icons we use in our footer -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    </body>
+</html>

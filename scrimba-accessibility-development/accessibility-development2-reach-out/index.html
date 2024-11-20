@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+        
+        <!-- Fonts & Icons -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+        <title>Contact Page</title>
+    </head>
+    <body class="contact-page">
+        <main id="main">
+            <!-- Form section -->
+            <div class="contact-form-section">
+                <form>
+                    <h1 class="contact-form-heading">Reach <span>Out</span></h1>
+                    <div class="contact-form-intro">Curious about something? Complete these fields and "get in touch", as you humans say. 🤙</div>
+                    <label for="name">Full name</label>
+                    <input class="contact-input" id="name" type="text" placeholder="tope alabi" />
+                    <label for="email">Email</label>
+                    <input class="contact-input" id="email" type="text" placeholder="toptech@gmail.com" />
+                    <label for="message">Message</label>
+                    <textarea class="contact-textarea" id="message" rows="4" cols="50" placeholder="Your message..."></textarea>
+                    <button class="contact-submit-button" type="button" onclick="submitForm()">Send message 🎉</button>
+                </form>
+                <img class="contact-image" src="https://img.freepik.com/free-photo/robot-handshake-human-background-artificial-intelligence-digital-transformation_53876-129769.jpg?ga=GA1.1.1222273585.1726059893&semt=ais_hybrid" alt="A robot hand and a human reaching for each other." />
+            </div>
+        </main>
+        <script src="index.js"></script>
+    </body>
+</html>
