@@ -1,0 +1,174 @@
+### JavaScript Notes with Syntax and Examples
+
+---
+
+#### 1. **For...of Loop**
+- **Definition**: Iterates over iterable objects like arrays, strings, maps, etc.
+- **Syntax**:  
+  ```javascript
+  for (const item of iterable) {
+      // Code to execute for each item
+  }
+  ```
+- **Example**:  
+  ```javascript
+  const fruits = ['apple', 'banana', 'cherry'];
+  for (const fruit of fruits) {
+      console.log(fruit);
+  }
+  ```
+
+---
+
+#### 2. **Import/Export**
+- **Definition**: Used to share and use code across multiple files in JavaScript modules.
+- **Syntax**:  
+  - **Export**:
+    ```javascript
+    export const myFunction = () => { ... };
+    export default myDefaultFunction = () => { ... };
+    ```
+  - **Import**:
+    ```javascript
+    import { myFunction } from './myModule.js';
+    import myDefaultFunction from './myModule.js';
+    ```
+- **Example**:
+  ```javascript
+  // File: math.js
+  export const add = (a, b) => a + b;
+  export default (a, b) => a - b;
+
+  // File: app.js
+  import { add } from './math.js';
+  import subtract from './math.js';
+  console.log(add(2, 3));       // 5
+  console.log(subtract(5, 3));  // 2
+  ```
+
+---
+
+#### 3. **Radio Input**
+- **Definition**: A form input element allowing a single selection from a group.
+- **Syntax**:
+  ```html
+  <input type="radio" name="group" value="value">
+  ```
+- **Example**:
+  ```html
+  <input type="radio" name="color" value="red"> Red
+  <input type="radio" name="color" value="blue"> Blue
+  ```
+
+---
+
+#### 4. **`.includes()`**
+- **Definition**: Checks if a string or array contains a specific value.
+- **Syntax**:
+  ```javascript
+  array.includes(value);
+  string.includes(value);
+  ```
+- **Example**:
+  ```javascript
+  const colors = ['red', 'blue', 'green'];
+  console.log(colors.includes('blue')); // true
+  ```
+
+---
+
+#### 5. **`e.target`**
+- **Definition**: Refers to the element that triggered the event.
+- **Example**:
+  ```javascript
+  document.addEventListener('click', (e) => {
+      console.log(e.target); // Logs the clicked element
+  });
+  ```
+
+---
+
+#### 6. **`parentElement`**
+- **Definition**: Returns the parent node of an element.
+- **Example**:
+  ```javascript
+  const child = document.querySelector('.child');
+  console.log(child.parentElement); // Logs the parent element
+  ```
+
+---
+
+#### 7. **`classList.add()` and `classList.remove()`**
+- **Definition**: Adds or removes a class from an element.
+- **Syntax**:
+  ```javascript
+  element.classList.add('className');
+  element.classList.remove('className');
+  ```
+- **Example**:
+  ```javascript
+  const box = document.querySelector('.box');
+  box.classList.add('highlight');    // Adds "highlight"
+  box.classList.remove('hidden');   // Removes "hidden"
+  ```
+
+---
+
+#### 8. **`getElementsByClassName`**
+- **Definition**: Selects elements with a specific class name.
+- **Syntax**:
+  ```javascript
+  document.getElementsByClassName('className');
+  ```
+- **Example**:
+  ```javascript
+  const elements = document.getElementsByClassName('item');
+  console.log(elements[0]); // Logs the first element with "item" class
+  ```
+
+---
+
+#### 9. **`querySelector`**
+- **Definition**: Selects the first element that matches a CSS selector.
+- **Syntax**:
+  ```javascript
+  document.querySelector(selector);
+  ```
+- **Example**:
+  ```javascript
+  const header = document.querySelector('h1');
+  console.log(header); // Logs the first <h1> element
+  ```
+
+---
+
+#### 10. **Checkbox Input**
+- **Definition**: A form input allowing multiple selections.
+- **Syntax**:
+  ```html
+  <input type="checkbox" name="option" value="value">
+  ```
+- **Example**:
+  ```html
+  <input type="checkbox" name="interest" value="coding"> Coding
+  <input type="checkbox" name="interest" value="design"> Design
+  ```
+
+---
+
+#### 11. **`.filter()`**
+- **Definition**: Creates a new array with elements that pass a condition.
+- **Syntax**:
+  ```javascript
+  array.filter(callbackFunction);
+  ```
+- **Example**:
+  ```javascript
+  const numbers = [1, 2, 3, 4, 5];
+  const even = numbers.filter(num => num % 2 === 0);
+  console.log(even); // [2, 4]
+  ```
+
+---
+
+These methods and concepts enhance functionality and interactivity in JavaScript applications, from form handling to DOM manipulation.
