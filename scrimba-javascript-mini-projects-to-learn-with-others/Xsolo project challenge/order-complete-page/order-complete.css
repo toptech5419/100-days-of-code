@@ -1,0 +1,49 @@
+/* General Styles for the Order Complete Page */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full height of the viewport */
+    background: linear-gradient(to bottom, #f3e5f5, #e1bee7);
+    color: #333;
+  }
+  
+  #order-complete {
+    text-align: center; /* Center align the content inside */
+    max-width: 600px; /* Optional: Limit the width of the content */
+    width: 100%; /* Full width for responsiveness */
+    padding: 20px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Heading Styles */
+  #order-complete h1 {
+    font-size: 24px;
+    color: #6a1b9a;
+    margin-bottom: 20px;
+  }
+  
+  /* Button Styling */
+  #order-complete a button {
+    background: #ffeb3b;
+    color: #6a1b9a;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  #order-complete a button:hover {
+    background: #ff6f00;
+    color: #fff;
+    transform: scale(1.05);
+  }
+  

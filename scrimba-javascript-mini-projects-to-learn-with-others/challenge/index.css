@@ -1,0 +1,25 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins';
+}
+
+.labels-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+}
+
+p {
+    margin: 8px;
+    font-size: 20px;
+}
+
+.label-card {
+    border-radius: 5px;
+    width: 250px;
+    padding: 5px 10px;
+    color: white;
+    background-color: dodgerblue;
+}

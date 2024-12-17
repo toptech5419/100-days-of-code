@@ -1,0 +1,547 @@
+### **Object Destructuring**
+Object destructuring is a concise way to extract values from objects and assign them to variables. Instead of accessing each property manually, you can destructure them in one step.
+
+#### **Syntax:**
+```javascript
+const person = { name: "John", age: 25, country: "USA" };
+const { name, age } = person;
+console.log(name); // John
+console.log(age);  // 25
+```
+
+#### **When to Use:**
+- To simplify access to object properties.
+- When passing object parameters into functions.
+
+#### **Example in Functions:**
+```javascript
+function greet({ name, country }) {
+  console.log(`Hello ${name} from ${country}`);
+}
+greet(person); // Hello John from USA
+```
+
+---
+
+### **`.map()`**
+The `.map()` method creates a **new array** by applying a callback function to each element of an original array.
+
+#### **Syntax:**
+```javascript
+const numbers = [1, 2, 3];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6]
+```
+
+#### **When to Use:**
+- When you need to transform or calculate something for every element in an array without modifying the original array.
+
+---
+
+### **`.join()`**
+The `.join()` method converts an array into a string by concatenating its elements with a specified separator.
+
+#### **Syntax:**
+```javascript
+const words = ["Hello", "world"];
+const sentence = words.join(" ");
+console.log(sentence); // "Hello world"
+```
+
+#### **When to Use:**
+- To turn an array into a human-readable string.
+- For formatting purposes, like converting arrays into CSV format.
+
+---
+
+### **`.map()` vs `.forEach()`**
+Both `.map()` and `.forEach()` iterate over an array, but they differ in purpose and use:
+
+| Feature        | `.map()`                              | `.forEach()`                        |
+|----------------|---------------------------------------|-------------------------------------|
+| **Return**     | Creates a new array.                 | Returns `undefined`.               |
+| **Use Case**   | Transforming data into a new format.  | Performing operations (e.g., logging, updating). |
+
+#### **Example:**
+```javascript
+const numbers = [1, 2, 3];
+
+const doubled = numbers.map(num => num * 2);
+console.log(doubled); // [2, 4, 6]
+
+numbers.forEach(num => console.log(num * 2)); 
+// Logs 2, 4, 6 but doesn't create a new array.
+```
+
+---
+
+### **`for` Loop Break and Continue**
+- **`break`**: Terminates the loop immediately.
+- **`continue`**: Skips the current iteration and proceeds to the next one.
+
+#### **Example:**
+```javascript
+for (let i = 1; i <= 5; i++) {
+  if (i === 3) continue; // Skip when i is 3
+  if (i === 5) break;    // Exit when i is 5
+  console.log(i);        // Logs 1, 2, 4
+}
+```
+
+#### **When to Use:**
+- Use `break` when you want to stop the loop based on a condition.
+- Use `continue` when you want to skip a specific iteration.
+
+---
+
+### **Dangers of Using `innerHTML`**
+Using `innerHTML` to inject user input can expose your app to **Cross-Site Scripting (XSS)** attacks. If you include malicious code, it can execute in the browser.
+
+#### **Example of Danger:**
+```javascript
+const input = "<img src='x' onerror='alert(\"Hacked!\")'>";
+document.body.innerHTML = input; // Executes the alert!
+```
+
+#### **Best Practice:**
+Use safer alternatives like `textContent` or escaping user input:
+```javascript
+const safeInput = "<b>Hello!</b>";
+document.body.textContent = safeInput; // Displays "<b>Hello!</b>" safely.
+```
+
+#### **When to Use:**
+- Avoid `innerHTML` for untrusted user input unless sanitized.
+- Use it only when dealing with static content you control.
+
+---
+
+### **Summary Table:**
+
+| Feature                     | Description                                                                                        | Use Case                                                                                           |
+|-----------------------------|----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| **Object Destructuring**     | Extracts values from objects in a concise way.                                                   | Access specific properties of an object or pass them to functions.                               |
+| **`.map()`**                 | Creates a new array by transforming each element.                                                | When you want a new array with modified or calculated values.                                    |
+| **`.join()`**                | Converts an array into a string with a specified separator.                                       | To format an array into a readable string.                                                       |
+| **`.map()` vs `.forEach()`** | `.map()` transforms and creates a new array, while `.forEach()` is used for side effects.         | Use `.map()` for data transformation and `.forEach()` for actions like logging or UI updates.    |
+| **Break and Continue**       | Break stops a loop, continue skips to the next iteration.                                        | When controlling loop flow based on specific conditions.                                         |
+| **Danger of `innerHTML`**    | Allows execution of malicious scripts if not sanitized.                                          | Use `textContent` or escape input when displaying user data to prevent XSS attacks.              |
+
+
+### **Function Expressions and Hoisting**
+A **function expression** is a way of defining a function by assigning it to a variable. Unlike **function declarations**, function expressions are **not hoisted**, meaning they cannot be used before they are defined.
+
+#### **Example:**
+```javascript
+// Function Expression
+const sayHello = function(name) {
+  return `Hello, ${name}`;
+};
+
+console.log(sayHello("John")); // Hello, John
+
+// Function Declaration (hoisted)
+function greet(name) {
+  return `Hi, ${name}`;
+}
+console.log(greet("Jane")); // Hi, Jane
+```
+
+#### **Hoisting with Function Expressions:**
+```javascript
+console.log(sayHi); // undefined
+var sayHi = function() {
+  return "Hi!";
+};
+```
+Here, `sayHi` is hoisted as `undefined`, but the function body is not hoisted.
+
+#### **When to Use:**
+- Function expressions are useful when you need to define functions dynamically or as anonymous callbacks.
+
+---
+
+### **Arrow Functions**
+Arrow functions are a shorter syntax for writing functions. They do not have their own `this`, making them ideal for use in callbacks and methods where preserving the parent `this` is necessary.
+
+#### **Syntax:**
+```javascript
+const add = (a, b) => a + b; // Implicit return for single-line functions
+console.log(add(3, 4)); // 7
+```
+
+#### **When to Use:**
+- For concise syntax, especially in callbacks.
+- When you don't need a `this` context (e.g., array methods, event listeners).
+
+---
+
+### **Inline Arrow Functions**
+Inline arrow functions are arrow functions used directly within another function call, often as callbacks.
+
+#### **Example:**
+```javascript
+const numbers = [1, 2, 3];
+const squared = numbers.map(num => num * num);
+console.log(squared); // [1, 4, 9]
+```
+
+#### **When to Use:**
+- When writing short, single-use callback functions.
+
+---
+
+### **`import` and `export` (Named)**
+Named imports and exports allow you to export multiple values from a module and import them by their exact names.
+
+#### **Example:**
+**Module File (`math.js`):**
+```javascript
+export const add = (a, b) => a + b;
+export const subtract = (a, b) => a - b;
+```
+
+**Importing in Another File:**
+```javascript
+import { add, subtract } from './math.js';
+console.log(add(2, 3)); // 5
+console.log(subtract(5, 3)); // 2
+```
+
+#### **When to Use:**
+- When a module has multiple exports and you only need specific ones.
+
+---
+
+### **`import` and `export` (Default)**
+Default exports allow you to export a single value from a module. The importing file can rename it during import.
+
+#### **Example:**
+**Module File (`greet.js`):**
+```javascript
+export default function greet(name) {
+  return `Hello, ${name}!`;
+}
+```
+
+**Importing in Another File:**
+```javascript
+import greet from './greet.js';
+console.log(greet("Alice")); // Hello, Alice!
+```
+
+#### **When to Use:**
+- When a module primarily exports one main thing.
+
+---
+
+### **`.reduce()`**
+The `.reduce()` method reduces an array to a single value by applying a callback function to each element.
+
+#### **Syntax:**
+```javascript
+const numbers = [1, 2, 3, 4];
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+console.log(sum); // 10
+```
+
+#### **When to Use:**
+- To aggregate data from an array, such as summing, multiplying, or finding max/min.
+
+---
+
+### **Default Parameters**
+Default parameters allow you to set default values for function arguments if no value is provided during the call.
+
+#### **Syntax:**
+```javascript
+function greet(name = "Guest") {
+  return `Hello, ${name}`;
+}
+console.log(greet()); // Hello, Guest
+console.log(greet("Alice")); // Hello, Alice
+```
+
+#### **When to Use:**
+- When designing functions that can work without requiring all arguments.
+
+---
+
+### **Ternary Operator**
+The ternary operator is a concise way to write `if-else` conditions.
+
+#### **Syntax:**
+```javascript
+const age = 18;
+const canVote = age >= 18 ? "Yes" : "No";
+console.log(canVote); // Yes
+```
+
+#### **When to Use:**
+- When you need a quick, single-line condition.
+
+---
+
+### **Rest Parameter**
+The rest parameter allows you to collect all remaining arguments into a single array.
+
+#### **Syntax:**
+```javascript
+function sum(...numbers) {
+  return numbers.reduce((acc, num) => acc + num, 0);
+}
+console.log(sum(1, 2, 3)); // 6
+```
+
+#### **Rules:**
+1. Rest parameters must be the last parameter in a function.
+2. There can only be one rest parameter.
+
+#### **When to Use:**
+- When a function needs to handle an unknown number of arguments.
+- To create flexible functions like a sum calculator or dynamic argument handlers.
+
+---
+
+### **Summary Table**
+
+| Feature                  | Description                                                                 | When to Use                                                                                       |
+|--------------------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|
+| **Function Expressions** | Functions assigned to variables, not hoisted.                              | Use for anonymous or dynamically created functions.                                              |
+| **Arrow Functions**       | Shorter syntax, no `this`.                                                 | Use for callbacks or when you don't need `this`.                                                 |
+| **Inline Arrow Functions**| Callback functions written directly within methods.                        | Use for short, one-time callbacks like in `.map()` or `.filter()`.                               |
+| **`import/export` (Named)**| Export/import specific items from a module.                               | Use when working with modules with multiple exports.                                             |
+| **`import/export` (Default)**| Export/import a single primary value.                                    | Use for modules with one main export.                                                            |
+| **`.reduce()`**           | Aggregates data from an array into a single value.                        | Use for calculations like sum, product, or complex data transformation.                          |
+| **Default Parameters**    | Set default values for function arguments.                                | Use when designing functions that can handle optional arguments.                                 |
+| **Ternary Operator**      | Short, inline conditionals.                                               | Use for quick decisions or toggles in code.                                                      |
+| **Rest Parameter**        | Collect remaining arguments into an array.                                | Use for flexible argument handling in functions or variable-length input.                        |
+
+
+### **Spread Operator (`...`)**
+#### **Definition:**
+The spread operator allows you to spread the elements of an array, object, or other iterable into another array or object. It's also useful for shallow copying.
+
+#### **Example:**
+1. **Copying and Merging Arrays:**
+```javascript
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const merged = [...arr1, ...arr2]; // [1, 2, 3, 4, 5, 6]
+```
+
+2. **Copying Objects:**
+```javascript
+const obj1 = { a: 1, b: 2 };
+const obj2 = { ...obj1, c: 3 }; // { a: 1, b: 2, c: 3 }
+```
+
+#### **When to Use:**
+- To combine or copy arrays/objects.
+- Pass an array as arguments in function calls:
+```javascript
+const numbers = [1, 2, 3];
+console.log(Math.max(...numbers)); // 3
+```
+
+---
+
+### **Short-Circuiting with `||` (OR)**
+#### **Definition:**
+The `||` operator short-circuits, returning the first truthy value it encounters or the last value if none are truthy.
+
+#### **Example:**
+```javascript
+const value = undefined || null || "Default Value"; // "Default Value"
+```
+
+#### **When to Use:**
+- Providing default values:
+```javascript
+const name = userInput || "Guest";
+```
+
+---
+
+### **Short-Circuiting with `&&` (AND)**
+#### **Definition:**
+The `&&` operator short-circuits, returning the first falsy value or the last truthy value if all are truthy.
+
+#### **Example:**
+```javascript
+const result = "JavaScript" && 42 && true; // true
+const stopAtFalsy = "Hello" && 0 && "World"; // 0
+```
+
+#### **When to Use:**
+- Ensure conditions are met before executing code:
+```javascript
+user.isLoggedIn && displayDashboard();
+```
+
+---
+
+### **Switch Statements**
+#### **Definition:**
+The `switch` statement evaluates an expression and executes code blocks based on matching `case` values.
+
+#### **Example:**
+```javascript
+const day = "Monday";
+
+switch (day) {
+  case "Monday":
+    console.log("Start of the week!");
+    break;
+  case "Friday":
+    console.log("Almost weekend!");
+    break;
+  default:
+    console.log("Midweek vibes.");
+}
+```
+
+#### **When to Use:**
+- Replacing complex `if-else` structures for better readability.
+- Handling multiple conditions with the same logic:
+```javascript
+case "Saturday":
+case "Sunday":
+  console.log("Weekend!");
+  break;
+```
+
+---
+
+### **Date Constructor (`new Date()`)**
+#### **Definition:**
+The `Date` constructor creates objects for handling dates and times.
+
+#### **Example:**
+1. **Current Date:**
+```javascript
+const now = new Date();
+console.log(now.toString());
+```
+
+2. **Custom Date:**
+```javascript
+const customDate = new Date(2024, 11, 25); // December 25, 2024
+```
+
+3. **Parse ISO String:**
+```javascript
+const fromISO = new Date("2024-12-25T10:00:00");
+```
+
+#### **When to Use:**
+- Formatting or manipulating dates:
+```javascript
+console.log(now.getFullYear()); // Current Year
+```
+
+---
+
+### **Error Constructor**
+#### **Definition:**
+The `Error` constructor creates error objects with a custom message for better debugging.
+
+#### **Example:**
+```javascript
+const error = new Error("Something went wrong!");
+console.log(error.name); // "Error"
+console.log(error.message); // "Something went wrong!"
+```
+
+#### **When to Use:**
+- Throwing and handling custom errors:
+```javascript
+throw new Error("Invalid input!");
+```
+
+---
+
+### **Objects with Methods and `this`**
+#### **Definition:**
+Objects can have functions (methods), and `this` refers to the object calling the method.
+
+#### **Example:**
+```javascript
+const user = {
+  name: "Alice",
+  greet() {
+    console.log(`Hello, ${this.name}!`);
+  },
+};
+
+user.greet(); // "Hello, Alice!"
+```
+
+#### **When to Use:**
+- Building reusable objects with shared behavior.
+
+---
+
+### **Constructor Function**
+#### **Definition:**
+A constructor function initializes new objects using the `new` keyword.
+
+#### **Example:**
+```javascript
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+const user1 = new Person("Alice", 25);
+console.log(user1.name); // "Alice"
+```
+
+#### **When to Use:**
+- For creating multiple objects with similar properties and methods.
+
+---
+
+### **Debugging: Errors**
+#### **Definition:**
+Errors occur when the code fails to execute as expected.
+
+#### **Types:**
+1. **Syntax Errors:** Issues in code structure.
+2. **Runtime Errors:** Errors during execution.
+3. **Logical Errors:** Code runs but gives wrong results.
+
+#### **Example:**
+```javascript
+try {
+  undefinedFunction(); // Will throw an error
+} catch (err) {
+  console.log(err.message); // Logs the error message
+}
+```
+
+---
+
+### **Debugging: `try...catch`**
+#### **Definition:**
+The `try...catch` block handles exceptions, allowing the program to run smoothly.
+
+#### **Example:**
+```javascript
+try {
+  const data = JSON.parse('{"name": "Alice"}');
+  console.log(data.name); // "Alice"
+} catch (error) {
+  console.log("Invalid JSON format");
+}
+```
+
+#### **When to Use:**
+- For error handling in critical code blocks:
+```javascript
+try {
+  let user = database.getUser();
+} catch (error) {
+  console.log("User not found");
+}
+```

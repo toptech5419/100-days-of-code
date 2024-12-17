@@ -1,0 +1,187 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #f3e5f5, #e1bee7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+  }
+  
+  .app-container {
+    max-width: 480px;
+    width: 100%;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+  }
+  
+  /* Header Section */
+  .header {
+    background-image: url('https://img.freepik.com/free-photo/delicious-indian-food-tray-flat-lay_23-2148723508.jpg?ga=GA1.1.1222273585.1726059893&semt=ais_hybrid');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .header-content {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .restaurant-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffeb3b;
+  }
+  
+  .restaurant-tagline {
+    font-size: 16px;
+    margin-top: 5px;
+    color: #fff;
+  }
+  
+  /* Menu Section */
+  .menu-container {
+    padding: 20px;
+    background: linear-gradient(to bottom, #6a1b9a, #ab47bc);
+    color: #fff;
+  }
+  
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+  }
+  
+  .item-info {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .item-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #fff;
+  }
+  
+  .item-name {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  
+  .item-description {
+    font-size: 12px;
+    color: #ccc;
+  }
+  
+  .item-price {
+    font-size: 16px;
+    color: #ffeb3b;
+  }
+  
+  .item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .quantity-input {
+    text-align: center;
+    vertical-align: middle; 
+    line-height: normal; 
+    height: 30px; 
+    display: inline-block; 
+    }
+  
+  .increment-btn, .decrement-btn {
+    background: #fff;
+    color: #6a1b9a;
+    border: 1px solid #6a1b9a;
+    border-radius: 8px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  
+  .increment-btn:hover, .decrement-btn:hover {
+    background: #6a1b9a;
+    color: #fff;
+  }
+  
+  .quantity-input {
+    width: 50px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+  
+  /* Footer Section */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+  
+  .clear-btn, .buy-btn {
+    background: #ffeb3b;
+    color: #6a1b9a;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+  }
+  
+  .clear-btn:hover, .buy-btn:hover {
+    background: #ff6f00;
+    color: #fff;
+  }
+
+  .decrement-btn:disabled {
+    filter: blur(2px);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .clear-btn:disabled {
+    filter: blur(2px);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  .buy-btn:disabled {
+    filter: blur(2px);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  
+  
+  
