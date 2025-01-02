@@ -1,0 +1,69 @@
+This JavaScript code manages the interactivity and responsiveness of a hamburger menu and navigation list in a webpage. Here's a detailed explanation:
+
+### **1. Wait for the DOM to Load**
+```javascript
+document.addEventListener("DOMContentLoaded", () => { ... });
+```
+- The `DOMContentLoaded` event ensures the script runs only after the HTML document has been fully loaded and parsed. This prevents errors from accessing DOM elements that may not yet exist.
+
+### **2. Select Relevant Elements**
+```javascript
+const hamburger = document.querySelector(".hamburger");
+const navList = document.querySelector(".nav-list");
+```
+- `hamburger`: Selects the element representing the hamburger icon.
+- `navList`: Selects the navigation list element that toggles visibility.
+
+### **3. Toggle Navigation List on Hamburger Click**
+```javascript
+hamburger.addEventListener("click", () => {
+    navList.style.display = navList.style.display === "flex" ? "none" : "flex";
+});
+```
+- Adds a `click` event listener to the hamburger icon.
+- Toggles the `display` style of the `navList`:
+  - If `navList` is currently displayed (`"flex"`), it is hidden by setting `display` to `"none"`.
+  - If `navList` is hidden, it is made visible by setting `display` to `"flex"`.
+- This allows the user to open and close the menu dynamically on smaller screens.
+
+### **4. Adjust Navigation Visibility on Window Resize**
+```javascript
+window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768) {
+        navList.style.display = "flex"; // Show nav on larger screens
+    } else {
+        navList.style.display = "none"; // Hide nav by default on smaller screens
+    }
+});
+```
+- Adds a `resize` event listener to the `window` object, which triggers whenever the browser window size changes.
+- Ensures that the navigation menu behaves appropriately for different screen sizes:
+  - If the screen width is `768px` or larger:
+    - Navigation is always displayed as a horizontal menu (`"flex"`).
+  - If the screen width is smaller than `768px`:
+    - Navigation is hidden (`"none"`), preparing it to be toggled by the hamburger menu.
+
+### **Key Features of the Code**
+1. **Dynamic Menu Toggle**:
+   - The `click` event on the hamburger icon allows users to toggle the visibility of the navigation menu on smaller screens.
+
+2. **Responsive Design Handling**:
+   - The `resize` event ensures the navigation menu is always displayed correctly for different screen sizes:
+     - Always visible on larger screens.
+     - Hidden by default on smaller screens for a clean, mobile-friendly experience.
+
+3. **User-Friendly Behavior**:
+   - Avoids issues where the navigation menu might remain hidden or incorrectly styled when resizing the window.
+
+### **Example Workflow**
+1. **Page Load**:
+   - The navigation menu is hidden if the screen is below `768px`.
+   - It is displayed if the screen width is `768px` or more.
+
+2. **User Interaction**:
+   - On small screens, clicking the hamburger icon toggles the menu's visibility.
+
+3. **Window Resizing**:
+   - Switching between small and large screen sizes dynamically updates the navigation menu's visibility to match the design intent.
+
+This code ensures a smooth and intuitive user experience while adhering to responsive design principles.

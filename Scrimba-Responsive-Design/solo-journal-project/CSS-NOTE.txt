@@ -1,0 +1,214 @@
+This CSS code is a comprehensive stylesheet designed to create a responsive, visually appealing layout for a website. Here's a detailed explanation of the code:
+
+---
+
+### General Reset and Base Styles
+
+1. **Universal Selector (`*`)**
+   ```css
+   * {
+       box-sizing: border-box;
+       padding: 0;
+       margin: 0;
+   }
+   ```
+   - Ensures all elements respect the `box-sizing` property, making width and height calculations consistent.
+   - Removes default padding and margin for a clean slate.
+
+2. **Body Styling**
+   ```css
+   body {
+       font-family: 'Roboto', sans-serif;
+       font-size: 1rem;
+       background-color: #fff;
+       color: #333;
+       line-height: 1.5;
+       padding: 0 1rem;
+   }
+   ```
+   - Sets a modern, sans-serif font.
+   - Provides a white background and a default text color for readability.
+   - Adds horizontal padding for spacing content from the edges.
+
+---
+
+### Header and Navigation
+
+3. **Main Header**
+   ```css
+   #main-header {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       padding: 1rem 0;
+       border-bottom: 1px solid #ddd;
+       position: sticky;
+       top: 0;
+       background-color: #ffffffe7;
+       z-index: 1000;
+   }
+   ```
+   - Creates a sticky header that stays at the top during scrolling.
+   - Uses Flexbox to align logo and hamburger/menu content.
+
+4. **Logo Styling**
+   ```css
+   .logo {
+       display: flex;
+       align-items: center;
+       font-size: 1rem;
+       font-weight: 800;
+       text-decoration: none;
+       color: #333;
+   }
+   ```
+   - Aligns the logo text and image horizontally.
+   - Makes the logo text bold and sets a consistent size.
+
+   ```css
+   .logo img {
+       height: 2rem;
+       margin-right: 0.5rem;
+   }
+   ```
+   - Scales the logo image and spaces it from the text.
+
+5. **Hamburger Menu**
+   ```css
+   .hamburger {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       cursor: pointer;
+   }
+   ```
+   - Centers the hamburger icon within its container.
+   - Adds a hover effect for user interaction:
+     ```css
+     .hamburger:hover {
+         transform: scale(1.1);
+         transition: transform 0.3s ease;
+     }
+     ```
+
+6. **Navigation List**
+   ```css
+   .nav-list {
+       list-style: none;
+       display: none;
+       flex-direction: column;
+       background-color: #fff;
+       padding: 1rem;
+       border: 1px solid #ddd;
+       position: absolute;
+       top: 3rem;
+       right: 1rem;
+       z-index: 1000;
+   }
+   ```
+   - Initially hidden; appears when the hamburger is clicked (JavaScript handles this).
+   - Styled for dropdown-like appearance on smaller screens.
+
+   ```css
+   .nav-list .nav-item a {
+       text-decoration: none;
+       color: #333;
+       font-weight: 800;
+   }
+   ```
+   - Ensures links are visually consistent and prominent.
+
+---
+
+### Hero Section and Articles
+
+7. **Hero Section**
+   ```css
+   #hero-post {
+       background-image: url('...');
+       color: #fff;
+       background-size: cover;
+       background-position: top right center;
+       padding: 2rem 1rem;
+   }
+   ```
+   - Displays a hero banner with a background image.
+   - Centers content within the banner.
+
+8. **Article Styling**
+   ```css
+   .article {
+       background-color: #fff;
+       padding: 1rem;
+       border-radius: 5px;
+       margin-bottom: 1rem;
+       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+   }
+   ```
+   - Adds a card-like style to articles for separation and visual hierarchy.
+
+---
+
+### Responsive Design
+
+9. **Media Queries**
+   ```css
+   @media screen and (min-width: 768px) {
+       .hamburger {
+           display: none;
+       }
+       .nav-list {
+           display: flex;
+           flex-direction: row;
+           gap: 2rem;
+       }
+   }
+   ```
+   - Hides the hamburger menu and displays navigation inline for larger screens.
+   - Adjusts padding and layout for better spacing.
+
+   ```css
+   @media screen and (min-width: 1440px) {
+       body {
+           font-size: 1.1rem;
+       }
+       .hero-description, .hero-title {
+           max-width: 800px;
+       }
+   }
+   ```
+   - Scales typography and content dimensions for wide screens.
+
+---
+
+### Footer and Miscellaneous
+
+10. **Footer**
+    ```css
+    footer {
+        text-align: center;
+        margin-top: 2rem;
+        background-color: #333;
+        color: #fff;
+        padding: 2rem 0;
+        display: flex;
+        flex-direction: column;
+    }
+    ```
+    - Creates a visually distinct footer with centered text.
+
+11. **Button Hover Effect**
+    ```css
+    .view-more:hover {
+        background-color: #ddd;
+        color: #333;
+        transform: translateY(-5px);
+    }
+    ```
+    - Adds interactivity with smooth transitions.
+
+---
+
+### Conclusion
+
+This CSS achieves a responsive, modern design with scalable layouts, interactive elements, and clear organization. The use of Flexbox and media queries ensures a user-friendly experience across devices.
