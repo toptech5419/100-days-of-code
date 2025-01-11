@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BlogSpace - A platform to post and read blog posts.">
+    <title>BlogSpace</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <h1 class="site-title">BlogSpace</h1>
+        </nav>
+    </header>
+
+    <main>
+        <section aria-labelledby="form-title">
+            <h2 id="form-title">Create a New Post</h2>
+            <form class="post-form" aria-describedby="form-instructions">
+                <p id="form-instructions">Fill in the fields below to add a new blog post.</p>
+                <div class="form-group">
+                    <label for="post-title">Title:</label>
+                    <input class="form-input" id="post-title" type="text" name="title" required />
+                </div>
+                <div class="form-group">
+                    <label for="post-body">Body:</label>
+                    <textarea class="form-input" id="post-body" name="body" rows="5" required></textarea>
+                </div>
+                <button class="submit-button" type="submit">Post</button>
+            </form>
+        </section>
+
+        <section aria-labelledby="blog-list-title">
+            <h2 id="blog-list-title">Recent Blog Posts</h2>
+            <div class="blog-list" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 BlogSpace. All rights reserved.</p>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>
