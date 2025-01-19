@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color Scheme Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./color-scheme-generator-logo/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./color-scheme-generator-logo/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./color-scheme-generator-logo/favicon-16x16.png">
+<link rel="manifest" href="./color-scheme-generator-logo/site.webmanifest">
+</head>
+<body>
+  <header>
+    <h1>Color Scheme Generator</h1>
+    <form id="color-form">
+      <div class="form-group">
+        <label for="pick-color">Pick a color:</label>
+        <input type="color" name="pick-color" id="pick-color" aria-label="pick-color" />
+      </div>
+      <div class="form-group">
+        <label for="color-scheme">Choose a scheme:</label>
+        <select name="color-scheme" id="color-scheme" aria-label="color-scheme"></select>
+      </div>
+      <button type="submit" id="submit-btn">Get Color Scheme</button>
+    </form>
+  </header>
+  <main id="show-container"></main>
+  <script type="module" src="index.js"></script>
+</body>
+</html>
