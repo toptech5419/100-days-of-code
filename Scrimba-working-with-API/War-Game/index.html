@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game of War</title>
+    <meta name="description" content="A fun and interactive Game of War using cards. Play against the computer and track your score!">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <div role="marquee" aria-live="polite">
+            <h2>Click on <span class="yellow">New Deck,</span> then <span class="yellow">Draw</span> to start the game!</h2>
+        </div>
+    </header>
+
+   
+    <main>
+        <p id="loading-text" class="loading-text">Loading...</p>
+        <section class="game-controls">
+            <button type="button" id="new-deck" aria-label="Generate a new deck of cards">New Deck</button>
+            <p id="remaining" aria-live="polite">Remaining cards will appear here</p>
+        </section>
+
+        <section class="game-info">
+            <h1 id="header">Game of War</h1>
+            <h2 id="computer-score" aria-live="polite">Computer score: 0</h2>
+            <h2 id="my-score" aria-live="polite">My score: 0</h2>
+        </section>
+
+        <section id="cards" aria-label="Cards on the table">
+            <div class="card-slot" aria-label="Computer's card slot" tabindex="0"></div>
+            <div class="card-slot" aria-label="Your card slot" tabindex="0"></div>
+        </section>
+
+        <section class="draw-button">
+            <button type="button" id="draw-cards" class="draw" aria-label="Draw cards to play the round">Draw</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Game of War</p>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+
+# Game of War
+
+The **Game of War** is a simple and interactive card game that pits the player against the computer. The game uses a deck of cards to draw two cards in each round and determines the winner based on the value of the cards. The player's objective is to score more points than the computer by the end of the game.
+
+---
+
+## Features
+
+1. **New Deck Generation**: 
+   - A fresh deck of cards is generated when you click the **New Deck** button.
+   - This deck is fetched from an external API, ensuring randomness.
+
+2. **Card Drawing**:
+   - Clicking the **Draw** button draws two cards: one for the player and one for the computer.
+   - The card values are compared, and scores are updated based on the winner of the round.
+
+3. **Score Tracking**:
+   - The player's and computer's scores are displayed dynamically and updated in real-time after every round.
+
+4. **Responsive Design**:
+   - The game layout adapts to different screen sizes, ensuring a great experience on mobile, tablet, and desktop.
+
+5. **Interactive Feedback**:
+   - Aria-live regions and visual cues provide feedback for accessibility, keeping players informed of the game's status.
+
+---
+
+## How It Works
+
+### 1. New Deck Button
+- **Functionality**:
+  - Clicking the **New Deck** button fetches a new shuffled deck of cards from the API.
+  - The remaining cards in the deck are displayed.
+
+- **Behind the Scenes**:
+  - The `deckId` is stored globally to reference the deck throughout the game.
+
+### 2. Draw Button
+- **Functionality**:
+  - Clicking **Draw** pulls two cards from the current deck.
+  - The cards are displayed in their respective slots: one for the computer and one for the player.
+  - The game determines the winner of the round based on the card values:
+    - **Ace** is the highest value.
+    - Numeric cards follow their face value, and face cards (Jack, Queen, King) are ranked accordingly.
+  - Scores are updated dynamically.
+
+- **Behind the Scenes**:
+  - The card data is fetched from the API.
+  - The game logic compares the value of the two drawn cards and updates scores.
+
+### 3. Remaining Cards
+- The number of cards left in the deck is displayed and updated after each draw.
+- When the deck is empty, the **Draw** button is disabled.
+
+### 4. Game Status
+- At the end of the game (when no cards are left), the winner is declared based on the final scores.
+
+---
+
+## How to Use
+
+1. Open the game in your browser.
+2. Click the **New Deck** button to initialize the game with a new shuffled deck.
+3. Click the **Draw** button to play each round.
+4. Keep track of scores and enjoy the game!
+
+---
+
+## Folder Structure
+```
+Game-of-War/
+│
+├── index.html   # The main HTML structure
+├── style.css    # Styling for the game
+├── index.js     # JavaScript logic for the game
+```
+
+---
+
+## Accessibility Features
+
+- **Keyboard Navigation**:
+  - All buttons are fully accessible via keyboard inputs.
+- **Aria-live Regions**:
+  - Dynamic updates (e.g., remaining cards, scores) are announced to screen readers.
+
+---
+
+## Known Issues
+
+- Ensure a stable internet connection as the game relies on an external API to fetch card data.
+- The game does not currently support multiplayer functionality or advanced game rules like tie-breakers.
+
+---
+
+## Future Enhancements
+
+1. Add multiplayer functionality.
+2. Include a settings menu to customize the game rules.
+3. Implement animations for drawing and playing cards.
+4. Display detailed statistics after each game (e.g., rounds won, total draws).
+
+---
+
+## Credits
+
+- **Background Image**: [iStock](https://media.istockphoto.com)
+- **Card API**: [Deck of Cards API](https://deckofcardsapi.com/)
+- Developed by: [Alabi Temitope](https://github.com/heritech9)
+
+---
+
+This game is a fun and educational way to practice DOM manipulation, API integration, and responsive web design. Enjoy the challenge and have fun playing the Game of War!

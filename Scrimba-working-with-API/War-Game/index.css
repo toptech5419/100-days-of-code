@@ -1,0 +1,277 @@
+/* Base Styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Exo 2", sans-serif;
+    background-image: url("https://media.istockphoto.com/id/1365539425/photo/dark-green-color-felt-fabric-texture-for-background.webp?a=1&b=1&s=612x612&w=0&k=20&c=2Pv17ar9PrEiXcCXZU0bGZdK_Zmh4TpWvhs58AUl4xs=");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+/* Marquee-like Header */
+header {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #FFF100;
+    width: 100%;
+    height: 60px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+header div[role="marquee"] {
+    overflow: hidden;
+    width: 100%;
+    height: 50px;
+    position: relative;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0;
+    font-size: 1.2em;
+    perspective: 1000px;
+}
+
+header div[role="marquee"] h2 {
+    position: absolute;
+    white-space: nowrap;
+    animation: scroll-up 15s linear infinite;
+    font-size: 1.2em;
+    margin: 0;
+    color: #FFF;
+    transform: translateZ(20px);
+}
+
+.yellow {
+    color: #FFF100;
+    font-weight: bold;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #FFA500;
+    transform: perspective(500px) translateZ(10px);
+    animation: pulse 1s ease-in-out infinite;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    animation-timing-function: ease-in-out;
+    animation-delay: 1s;
+}
+
+/* Marquee Animation */
+@keyframes scroll-up {
+    0% {
+        transform: translateX(100%) translateZ(20px);
+    }
+    100% {
+        transform: translateX(-100%) translateZ(20px);
+    }
+}
+
+.arrow-container {
+    position: absolute;
+    top: -20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1; 
+}
+
+.down-arrow {
+    font-size: 24px; 
+}
+
+
+
+.winner-banner {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #FFF100;
+    padding: 20px;
+    border-radius: 10px;
+    animation: bounce-in 0.5s ease forwards;
+    display: none; 
+}
+
+.restart-button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #FFF100;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.loading {
+    filter: blur(5px); 
+    pointer-events: none; 
+}
+
+#loading-text {
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100; 
+    font-size: 1.5em;
+    color: yellow;
+}
+
+.loading-text::after {
+    content: '';
+    display: block;
+    margin: 15px auto;
+    width: 30px;
+    height: 30px;
+    border: 5px solid yellow; 
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite; 
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Buttons with 3D Effect */
+button {
+    background-color: #FFF100;
+    border: none;
+    border-radius: 8px;
+    color: #333;
+    font-size: 1em;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 4px #C9A500;
+    transition: transform 0.2s, box-shadow 0.2s;
+    transform: perspective(500px) translateZ(10px);
+}
+
+button:active {
+    transform: translateY(4px) translateZ(6px);
+    box-shadow: 0 2px #A58A00;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    background-color: #bbb;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Specific Button Styling */
+button#new-deck {
+    align-self: flex-start;
+}
+
+button.draw {
+    font-size: 1.2em;
+    align-self: stretch;
+}
+
+/* Score Display (Digital Screen Look) */
+h2#computer-score, h2#my-score {
+    background: #111;
+    color: #0F0;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: "Courier New", Courier, monospace;
+    text-align: center;
+    display: inline-block;
+    width: fit-content;
+    margin: 10px auto;
+    box-shadow: inset 0 0 5px #0F0, 0 0 10px #0F0;
+}
+
+/* Card Slots */
+#cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+div.card-slot {
+    border: 1px solid #000;
+    border-radius: 10px;
+    height: 120px;
+    width: calc(120px * 5 / 7);
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.card-slot:nth-of-type(1) {
+    margin-bottom: 20px;
+}
+
+img.card {
+    width: 100%;
+    height: 100%;
+}
+
+/* Top Controls Section */
+div.top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Responsive Design • Mobile First */
+@media (min-width: 768px) {
+    body {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    button {
+        font-size: 1.2em;
+    }
+
+    header div[role="marquee"] {
+        font-size: 1em;
+    }
+
+    h2#computer-score, h2#my-score {
+        font-size: 1.5em;
+    }
+
+    div.card-slot {
+        height: 180px;
+        width: calc(180px * 5 / 7);
+    }
+}
+
+@media (min-width: 1024px) {
+    #cards {
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    div.card-slot {
+        height: 200px;
+        width: calc(200px * 5 / 7);
+    }
+
+    header {
+        margin-bottom: 40px;
+    }
+}
+
+/* Footer Section*/
+footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #aaa;
+}
