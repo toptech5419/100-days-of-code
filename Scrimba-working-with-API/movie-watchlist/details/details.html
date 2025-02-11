@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Watchlist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./details.css">
+</head>
+<body>
+    <button type="button" class="back-btn" id="backBtn" title="Go back">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+    
+    <main class="details-container" id="details-container">
+        <!-- Content populated by JavaScript -->
+    </main>
+
+    <div class="trailer-modal" id="trailerModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="trailerContainer"></div>
+        </div>
+    </div>
+
+    <script src="details.js"></script>
+</body>
+</html>

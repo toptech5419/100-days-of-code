@@ -1,0 +1,280 @@
+/* Base Styles */
+:root {
+  --primary-color: #2b2d42;
+  --secondary-color: #edf2f4;
+  --accent-color: #ef233c;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --primary-color: #edf2f4;
+  --secondary-color: #2b2d42;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  transition: var(--transition);
+  min-height: 100vh;
+}
+
+/* Header Styles */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  position: relative;
+  gap: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.watchlist-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Button Styles */
+.btn {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0.95;
+}
+
+.back-btn {
+  background: var(--secondary-color);
+  color: var(--primary-color);
+  border: 2px solid var(--accent-color);
+  padding: 0.75rem 1.5rem;
+}
+
+.remove-all-btn {
+  background: #dc3545;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Watchlist Container */
+.watchlist-container {
+  display: grid;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 160px);
+}
+
+/* Empty State */
+.empty-state {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  padding: 2rem;
+}
+
+.empty-state i {
+  font-size: 4rem;
+  color: var(--primary-color);
+  opacity: 0.2;
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
+}
+
+.empty-state h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.empty-state p {
+  color: var(--primary-color);
+  opacity: 0.7;
+  max-width: 400px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Movie Card */
+.movie-card {
+  background: var(--secondary-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(45deg, #f0f0f0, #ffffff);
+}
+
+.streaming-platforms {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.platform-link {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  transition: var(--transition);
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+.platform-link:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Platform Icons */
+.fa-netflix {
+  color: #e50914;
+}
+
+.fa-hulu {
+  color: #1ce783;
+}
+
+.fa-amazon {
+  color: #00a8e1;
+}
+
+.fa-disney {
+  color: #113ccf;
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+  .header-container {
+    flex-wrap: nowrap;
+    padding: 1rem 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .watchlist-title {
+    font-size: 1.25rem;
+    position: static;
+    transform: none;
+    order: 2;
+    text-align: center;
+    flex: 1;
+  }
+
+  .back-btn,
+  .remove-all-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .back-btn {
+    order: 1;
+  }
+
+  .remove-all-btn {
+    order: 3;
+  }
+
+  .empty-state {
+    padding: 1rem;
+    position: static;
+    transform: none;
+    margin-top: 2rem;
+  }
+
+  .empty-state i {
+    font-size: 3rem;
+  }
+
+  .empty-state h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .watchlist-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .movie-poster {
+    height: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .watchlist-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .movie-poster {
+    height: 350px;
+  }
+
+  .header-container {
+    padding: 1.5rem 2rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    width: auto;
+  }
+
+  .header-container {
+    gap: 0.25rem;
+  }
+
+  .watchlist-title {
+    font-size: 1.1rem;
+  }
+
+  .empty-state p {
+    font-size: 0.9rem;
+  }
+}
