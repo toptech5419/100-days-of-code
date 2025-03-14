@@ -1,0 +1,344 @@
+/* CSS Variables for consistent theming */
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --accent-color: #007bff;
+    --error-color: #ff4d4d;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Dark theme variables */
+  body.dark {
+    --bg-color: #333;
+    --text-color: #f0f0f0;
+    --card-bg: rgba(68, 68, 68, 0.9);
+    --accent-color: #66b3ff;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    color: var(--text-color);
+    background: var(--bg-color);
+    overflow: hidden;
+  }
+  
+  /* Background styles */
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .background.next {
+    opacity: 0;
+  }
+  
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
+    z-index: 0;
+  }
+  
+  /* Credit line */
+  .credit {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.8em;
+    color: #fff;
+    z-index: 2;
+  }
+  
+  .credit a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .credit a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Loading overlay */
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    display: none; /* Hidden by default */
+  }
+  
+  .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--accent-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Error overlay */
+  .error-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 0, 0.1);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .error-overlay p {
+    color: var(--error-color);
+    font-size: 1.2em;
+    margin: 0 0 10px;
+  }
+  
+  .error-overlay button {
+    background: var(--error-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  .error-overlay button:hover {
+    background: #cc0000;
+  }
+  
+  /* Main container */
+  .container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Section styles */
+  .crypto-section, .time-section, .weather-section {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    max-width: 30%;
+    box-sizing: border-box;
+  }
+  
+  .time-section {
+    text-align: center;
+  }
+  
+  #time {
+    font-size: 4em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Crypto section */
+  .crypto-section select, .time-section select, .weather-section select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+  
+  #crypto-data h2 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+  }
+  
+  #crypto-data p {
+    margin: 5px 0;
+  }
+  
+  .alert-section {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .alert-section input {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Weather forecast */
+  #forecast {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+  }
+  
+  .forecast-item {
+    text-align: center;
+    font-size: 0.9em;
+  }
+  
+  .forecast-item p {
+    margin: 5px 0;
+  }
+  
+  /* Settings panel */
+  .settings-icon {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 3;
+    color: var(--text-color);
+  }
+  
+  .settings-panel {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Hidden by default */
+    width: 300px;
+    height: 100%;
+    background: var(--card-bg);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    transition: right 0.3s ease;
+    z-index: 2;
+    box-sizing: border-box;
+  }
+  
+  .settings-panel.show {
+    right: 0; /* Slides in when 'show' class is added */
+  }
+  
+  .close-settings {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: var(--text-color);
+  }
+  
+  .settings-panel h2 {
+    margin: 0 0 20px;
+    font-size: 1.5em;
+  }
+  
+  .settings-panel label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+  }
+  
+  .settings-panel input, .settings-panel select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Buttons */
+  button {
+    background: var(--accent-color);
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.2s;
+  }
+  
+  button:hover {
+    background: #0056b3;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1024px) {
+    .container {
+      flex-direction: column;
+      justify-content: center;
+      padding: 15px;
+    }
+    .crypto-section, .time-section, .weather-section {
+      max-width: 80%;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    #time {
+      font-size: 3em;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+    .crypto-section, .time-section, .weather-section {
+      max-width: 100%;
+    }
+    #time {
+      font-size: 2.5em;
+    }
+    .settings-panel {
+      width: 100%;
+      right: -100%;
+    }
+    .settings-panel.show {
+      right: 0;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #time {
+      font-size: 2em;
+    }
+    .crypto-section select, .time-section select, .weather-section select {
+      padding: 6px;
+    }
+    .alert-section input {
+      width: 80px;
+    }
+    .settings-icon {
+      font-size: 1.2em;
+    }
+  }

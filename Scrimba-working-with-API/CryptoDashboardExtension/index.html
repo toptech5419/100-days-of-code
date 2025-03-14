@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="./favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="./favicon_io/site.webmanifest">
+  <title>Crypto Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="./chart.js"></script>
+  <script src="./chartjs-adapter-date-fns.js"></script>
+</head>
+<body>
+  <div class="background current"></div>
+  <div class="background next"></div>
+  <div class="overlay"></div>
+  <div class="credit">Photo by <a href="#" target="_blank" title="Photographer's Profile">Photographer's Name</a> on Unsplash</div>
+
+  <div class="loading-overlay">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+
+  <div class="error-overlay">
+    <p id="error-message">An error occurred. Please try again.</p>
+    <button id="retry">Retry</button>
+  </div>
+
+  <div class="container">
+    <div class="crypto-section">
+      <select id="crypto-select" title="Select Cryptocurrency"></select>
+      <div id="crypto-data">
+        <h2 id="crypto-name"></h2>
+        <p id="crypto-price"></p>
+        <p id="crypto-change"></p>
+        <p id="crypto-market-cap"></p>
+        <canvas id="crypto-chart" width="200" height="100"></canvas>
+      </div>
+      <button id="refresh-crypto">Refresh</button>
+      <div class="alert-section">
+        <input type="number" id="alert-price" placeholder="Set alert price">
+        <button id="set-alert">Set Alert</button>
+      </div>
+    </div>
+
+    <div class="time-section">
+      <h1 id="time"></h1>
+      <select id="time-zone" title="Select Time Zone">
+        <option value="local">Local Time</option>
+        <option value="America/New_York">New York</option>
+        <option value="Europe/London">London</option>
+        <option value="Asia/Tokyo">Tokyo</option>
+      </select>
+    </div>
+
+    <div class="weather-section">
+      <h2>Weather</h2>
+      <div id="current-weather">
+        <p id="weather-city"></p>
+        <p id="weather-temp"></p>
+        <p id="weather-desc"></p>
+        <img id="weather-icon" src="" alt="Weather Icon">
+      </div>
+      <div id="forecast"></div>
+    </div>
+  </div>
+
+  <div class="settings-icon">⚙️</div>
+  <div class="settings-panel">
+    <button class="close-settings">✖</button>
+    <h2>Settings</h2>
+    <label for="crypto-list">Cryptocurrencies (comma-separated):</label>
+    <input type="text" id="crypto-list" value="bitcoin,solana,ethereum">
+    <label for="unsplash-theme">Unsplash Theme:</label>
+    <input type="text" id="unsplash-theme" value="nature">
+    <label for="update-interval">Update Interval (minutes):</label>
+    <input type="number" id="update-interval" value="5">
+    <label for="weather-city">Weather City:</label>
+    <select id="weather-city" title="Select Weather City">
+      <option value="New York">New York</option>
+      <option value="London">London</option>
+      <option value="Tokyo">Tokyo</option>
+    </select>
+    <label for="dark-theme">Dark Theme:</label>
+    <input type="checkbox" id="dark-theme">
+    <label for="sound-effects">Sound Effects:</label>
+    <input type="checkbox" id="sound-effects" checked>
+    <button id="save-settings">Save</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
