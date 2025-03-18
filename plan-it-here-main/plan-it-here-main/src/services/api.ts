@@ -37,7 +37,6 @@ let amadeusToken: string | null = null;
 let tokenExpiry: number | null = null;
 
 const getAmadeusToken = async (): Promise<string> => {
-  // Check if we have a valid token
   if (amadeusToken && tokenExpiry && Date.now() < tokenExpiry) {
     return amadeusToken;
   }
@@ -62,16 +61,19 @@ const getAmadeusToken = async (): Promise<string> => {
 
     const data = await response.json();
     amadeusToken = data.access_token;
-    // Set expiry time (subtract 5 minutes to be safe)
-    tokenExpiry = Date.now() + (data.expires_in * 1000) - 300000;
+    tokenExpiry = Date.now() + (data.expires_in * 1000) - 300000; // Refresh 5 minutes early
     return amadeusToken;
   } catch (error) {
     console.error("Error getting Amadeus token:", error);
+    toast({
+      title: "Authentication Error",
+      description: "Unable to connect to the travel service. Please try again later.",
+      variant: "destructive",
+    });
     throw error;
   }
 };
 
-// API Functions
 export const searchFlights = async (query: FlightQuery) => {
   try {
     const token = await getAmadeusToken();
@@ -107,8 +109,8 @@ export const searchFlights = async (query: FlightQuery) => {
   } catch (error) {
     console.error("Error fetching flights:", error);
     toast({
-      title: "Error fetching flights",
-      description: "Please try again later",
+      title: "Error Fetching Flights",
+      description: "Unable to retrieve flight options. Please check your input and try again.",
       variant: "destructive",
     });
     throw error;
@@ -144,8 +146,8 @@ export const searchHotels = async (query: HotelQuery) => {
   } catch (error) {
     console.error("Error fetching hotels:", error);
     toast({
-      title: "Error fetching hotels",
-      description: "Please try again later",
+      title: "Error Fetching Hotels",
+      description: "Unable to retrieve hotel options. Please try again later.",
       variant: "destructive",
     });
     throw error;
@@ -172,15 +174,14 @@ export const getWeather = async (query: WeatherQuery) => {
   } catch (error) {
     console.error("Error fetching weather:", error);
     toast({
-      title: "Error fetching weather data",
-      description: "Please try again later",
+      title: "Error Fetching Weather",
+      description: "Unable to retrieve weather data. Please try again later.",
       variant: "destructive",
     });
     throw error;
   }
 };
 
-// For airport/city information lookup
 export const getLocationInfo = async (query: string) => {
   try {
     const token = await getAmadeusToken();
@@ -206,8 +207,8 @@ export const getLocationInfo = async (query: string) => {
   } catch (error) {
     console.error("Error fetching location info:", error);
     toast({
-      title: "Error fetching location information",
-      description: "Please try again later",
+      title: "Error Fetching Location Info",
+      description: "Unable to retrieve location suggestions. Please check your input and try again.",
       variant: "destructive",
     });
     throw error;

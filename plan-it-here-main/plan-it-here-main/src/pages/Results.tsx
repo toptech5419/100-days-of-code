@@ -9,7 +9,8 @@ import { MapPin, ArrowLeft, Plane, Hotel, CloudSun, Star } from 'lucide-react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { getLocationInfo, getWeather } from '../services/api';
+import { searchFlights, searchHotels, getWeather, getLocationInfo } from '../services/api';
+import { toast } from '@/components/ui/use-toast';
 
 interface Flight {
   id: string;
@@ -54,14 +55,11 @@ const Results: React.FC = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        // Step 1: Fetch location info for the destination IATA code
         const locationInfo = await getLocationInfo(destination);
         if (!locationInfo.data || locationInfo.data.length === 0) {
           throw new Error('Destination not found');
         }
         const primaryLocation = locationInfo.data[0];
-
-        // Step 2: Extract coordinates and city code based on location type
         let lat: number;
         let lon: number;
         let cityCode: string;
@@ -78,82 +76,61 @@ const Results: React.FC = () => {
           throw new Error('Unsupported location type');
         }
 
-        // Step 3: Fetch weather data using coordinates
         const weatherData = await getWeather({ lat, lon });
         setWeather({
           temp: weatherData.main.temp,
           description: weatherData.weather[0].description,
           icon: weatherData.weather[0].icon,
-          city: weatherData.name, // City name from OpenWeatherMap
+          city: weatherData.name,
           lat: weatherData.coord.lat,
           lon: weatherData.coord.lon,
         });
 
-        // Mock flights data (replace with real API call later)
-        setFlights([
-          {
-            id: '1',
-            airline: 'Air Pacific',
-            flightNumber: 'AP284',
-            departure: '08:45',
-            arrival: '14:20',
-            duration: '5h 35m',
-            price: 450,
-          },
-          {
-            id: '2',
-            airline: 'JetStream',
-            flightNumber: 'JS105',
-            departure: '10:15',
-            arrival: '16:00',
-            duration: '5h 45m',
-            price: 389,
-          },
-          {
-            id: '3',
-            airline: 'Global Airways',
-            flightNumber: 'GA512',
-            departure: '14:30',
-            arrival: '20:05',
-            duration: '5h 35m',
-            price: 520,
-          },
-        ]);
+        const flightResponse = await searchFlights({
+          origin,
+          destination,
+          departureDate,
+          returnDate,
+          adults: 1,
+          nonStop: false,
+        });
+        setFlights(
+          flightResponse.data.map((flight: any) => ({
+            id: flight.id,
+            airline: flight.validatingAirlineCodes[0],
+            flightNumber: flight.itineraries[0].segments[0].number,
+            departure: flight.itineraries[0].segments[0].departure.at.split('T')[1].slice(0, 5),
+            arrival: flight.itineraries[0].segments[0].arrival.at.split('T')[1].slice(0, 5),
+            duration: flight.itineraries[0].duration.replace('PT', '').toLowerCase(),
+            price: parseFloat(flight.price.total),
+          }))
+        );
 
-        // Mock hotels data (replace with real API call later using cityCode)
-        setHotels([
-          {
-            id: '1',
-            name: 'Grand Plaza Hotel',
-            rating: 4.5,
-            price: 220,
-            image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=300',
-          },
-          {
-            id: '2',
-            name: 'Sunset Resort & Spa',
-            rating: 5,
-            price: 350,
-            image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=300',
-          },
-          {
-            id: '3',
-            name: 'City Center Inn',
-            rating: 3.5,
-            price: 120,
-            image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=300',
-          },
-        ]);
+        const hotelResponse = await searchHotels({ cityCode });
+        setHotels(
+          hotelResponse.data.map((hotel: any) => ({
+            id: hotel.hotelId,
+            name: hotel.name,
+            rating: parseFloat(hotel.rating) || 0,
+            price: hotel.offers ? parseFloat(hotel.offers[0].price.total) : 0,
+            image: hotel.media?.[0]?.uri || 'https://via.placeholder.com/300',
+          }))
+        );
 
         setLoading(false);
       } catch (error) {
         console.error('Error loading data:', error);
+        toast({
+          title: "Error loading travel data",
+          description: "Please try again later",
+          variant: "destructive",
+        });
         setLoading(false);
       }
     };
 
     loadData();
-  }, [destination]);
+  }, [origin, destination, departureDate, returnDate]);
 
   const renderRatingStars = (rating: number) => {
     const stars = [];
@@ -169,7 +146,6 @@ const Results: React.FC = () => {
     return stars;
   };
 
-  // Fix Leaflet default marker icon issue
   delete (L.Icon.Default.prototype as any)._getIconUrl;
   L.Icon.Default.mergeOptions({
     iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -189,7 +165,6 @@ const Results: React.FC = () => {
     <PageTransition>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-100">
         <TravelHeader minimal />
-
         <main className="container mx-auto px-4 pt-24 pb-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
             <div>
@@ -210,19 +185,18 @@ const Results: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {/* Flights Section */}
             <section>
               <h2 className="flex items-center text-xl font-semibold mb-4">
                 <Plane className="h-5 w-5 mr-2 text-primary" />
                 Flights
               </h2>
-              <div className="space-y-4">
-                {flights.map((flight) => (
+              {flights.length > 0 ? (
+                flights.map((flight) => (
                   <Card key={flight.id}>
                     <CardHeader className="pb-2">
                       <CardTitle className="text-base flex justify-between">
                         <span>{flight.airline}</span>
-                        <span className="text-primary">${flight.price}</span>
+                        <span className="text-primary">${flight.price.toFixed(2)}</span>
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="pb-2">
@@ -250,18 +224,21 @@ const Results: React.FC = () => {
                       </Button>
                     </CardFooter>
                   </Card>
-                ))}
-              </div>
+                ))
+              ) : (
+                <p className="text-center text-muted-foreground">
+                  No flights found for the selected route and dates.
+                </p>
+              )}
             </section>
 
-            {/* Hotels Section */}
             <section>
               <h2 className="flex items-center text-xl font-semibold mb-4">
                 <Hotel className="h-5 w-5 mr-2 text-primary" />
                 Hotels
               </h2>
-              <div className="space-y-4">
-                {hotels.map((hotel) => (
+              {hotels.length > 0 ? (
+                hotels.map((hotel) => (
                   <Card key={hotel.id}>
                     <div className="aspect-video relative overflow-hidden">
                       <img
@@ -275,12 +252,13 @@ const Results: React.FC = () => {
                     </div>
                     <CardHeader className="pb-2">
                       <CardTitle className="text-base">{hotel.name}</CardTitle>
-                      <div className="flex items-center">
-                        {renderRatingStars(hotel.rating)}
-                      </div>
+                      <div className="flex items-center">{renderRatingStars(hotel.rating)}</div>
                     </CardHeader>
                     <CardContent className="pb-2">
-                      <p className="font-medium text-primary">${hotel.price} <span className="text-xs text-muted-foreground">per night</span></p>
+                      <p className="font-medium text-primary">
+                        ${hotel.price ? hotel.price.toFixed(2) : 'N/A'}{' '}
+                        <span className="text-xs text-muted-foreground">per night</span>
+                      </p>
                     </CardContent>
                     <CardFooter>
                       <Button variant="outline" size="sm" className="w-full">
@@ -288,11 +266,14 @@ const Results: React.FC = () => {
                       </Button>
                     </CardFooter>
                   </Card>
-                ))}
-              </div>
+                ))
+              ) : (
+                <p className="text-center text-muted-foreground">
+                  No hotels found in the selected destination.
+                </p>
+              )}
             </section>
 
-            {/* Map Section */}
             <section>
               <h2 className="flex items-center text-xl font-semibold mb-4">
                 <MapPin className="h-5 w-5 mr-2 text-primary" />
@@ -311,7 +292,7 @@ const Results: React.FC = () => {
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                       />
                       <Marker position={[weather.lat, weather.lon]}>
-                        <Popup>{weather.city}</Popup> {/* Display city name */}
+                        <Popup>{weather.city}</Popup>
                       </Marker>
                     </MapContainer>
                   ) : (
@@ -325,7 +306,6 @@ const Results: React.FC = () => {
               </Card>
             </section>
 
-            {/* Weather Section */}
             <section>
               <h2 className="flex items-center text-xl font-semibold mb-4">
                 <CloudSun className="h-5 w-5 mr-2 text-primary" />
@@ -333,13 +313,19 @@ const Results: React.FC = () => {
               </h2>
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base">{weather?.city}</CardTitle>
+                  <CardTitle className="text-base">{weather?.city || destination}</CardTitle>
                 </CardHeader>
-                <CardContent className="text-center py-4">
-                  <CloudSun className="h-16 w-16 mx-auto text-yellow-400" />
-                  <p className="text-3xl font-bold mt-2">{weather?.temp}°C</p>
-                  <p className="text-muted-foreground">{weather?.description}</p>
-                </CardContent>
+                {weather ? (
+                  <CardContent className="text-center py-4">
+                    <CloudSun className="h-16 w-16 mx-auto text-yellow-400" />
+                    <p className="text-3xl font-bold mt-2">{weather.temp}°C</p>
+                    <p className="text-muted-foreground">{weather.description}</p>
+                  </CardContent>
+                ) : (
+                  <CardContent className="text-center py-4">
+                    <p className="text-muted-foreground">Unable to fetch weather data for {destination}.</p>
+                  </CardContent>
+                )}
               </Card>
             </section>
           </div>
