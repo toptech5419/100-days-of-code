@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { format } from 'date-fns';
-import { CalendarIcon, Plane, Search } from 'lucide-react';
+import { CalendarIcon, Plane, Search, Loader2 } from 'lucide-react';
 import { getLocationInfo } from '../services/api';
 
 interface LocationSuggestion {
@@ -31,6 +31,10 @@ const Home: React.FC = () => {
   const [isDestinationFocused, setIsDestinationFocused] = useState(false);
   const [originError, setOriginError] = useState<string | null>(null);
   const [destinationError, setDestinationError] = useState<string | null>(null);
+  const [isOriginLoading, setIsOriginLoading] = useState(false);
+  const [isDestinationLoading, setIsDestinationLoading] = useState(false);
+  const [isDeparturePopoverOpen, setIsDeparturePopoverOpen] = useState(false);
+  const [isReturnPopoverOpen, setIsReturnPopoverOpen] = useState(false);
 
   const fetchSuggestions = useCallback(
     async (query: string, isOrigin: boolean) => {
@@ -38,14 +42,19 @@ const Home: React.FC = () => {
         if (isOrigin) {
           setOriginSuggestions([]);
           setOriginError(null);
+          setIsOriginLoading(false);
         } else {
           setDestinationSuggestions([]);
           setDestinationError(null);
+          setIsDestinationLoading(false);
         }
         return;
       }
 
       try {
+        if (isOrigin) setIsOriginLoading(true);
+        else setIsDestinationLoading(true);
+
         const response = await getLocationInfo(query);
         const suggestions = response.data
           .filter((loc: any) => loc.subType === 'CITY' || loc.subType === 'AIRPORT')
@@ -54,21 +63,26 @@ const Home: React.FC = () => {
             name: loc.subType === 'CITY' ? loc.name : `${loc.name} (${loc.address.cityName})`,
             type: loc.subType,
           }));
+
         if (isOrigin) {
           setOriginSuggestions(suggestions);
           setOriginError(null);
+          setIsOriginLoading(false);
         } else {
           setDestinationSuggestions(suggestions);
           setDestinationError(null);
+          setIsDestinationLoading(false);
         }
       } catch (error) {
         console.error(`Error fetching ${isOrigin ? 'origin' : 'destination'} suggestions:`, error);
         if (isOrigin) {
           setOriginSuggestions([]);
           setOriginError('Unable to fetch origin suggestions. Please try again.');
+          setIsOriginLoading(false);
         } else {
           setDestinationSuggestions([]);
           setDestinationError('Unable to fetch destination suggestions. Please try again.');
+          setIsDestinationLoading(false);
         }
       }
     },
@@ -95,13 +109,13 @@ const Home: React.FC = () => {
       setSelectedOriginIata(suggestion.iataCode);
       setOriginSuggestions([]);
       setIsOriginFocused(false);
-      setOriginError(null); // Clear error on selection
+      setOriginError(null);
     } else {
       setDestination(suggestion.name);
       setSelectedDestinationIata(suggestion.iataCode);
       setDestinationSuggestions([]);
       setIsDestinationFocused(false);
-      setDestinationError(null); // Clear error on selection
+      setDestinationError(null);
     }
   };
 
@@ -149,18 +163,23 @@ const Home: React.FC = () => {
                   <Plane className="h-4 w-4 rotate-45 text-muted-foreground" />
                   <label htmlFor="origin" className="text-sm font-medium">Origin</label>
                 </div>
-                <Input
-                  id="origin"
-                  placeholder="Enter origin city or airport (e.g., Sydney)"
-                  value={origin}
-                  onChange={(e) => {
-                    setOrigin(e.target.value);
-                    setSelectedOriginIata(null);
-                  }}
-                  onFocus={() => setIsOriginFocused(true)}
-                  onBlur={() => setTimeout(() => setIsOriginFocused(false), 200)}
-                  className={errors.origin ? 'border-red-300' : ''}
-                />
+                <div className="relative">
+                  <Input
+                    id="origin"
+                    placeholder="Enter origin city or airport (e.g., Sydney)"
+                    value={origin}
+                    onChange={(e) => {
+                      setOrigin(e.target.value);
+                      setSelectedOriginIata(null);
+                    }}
+                    onFocus={() => setIsOriginFocused(true)}
+                    onBlur={() => setTimeout(() => setIsOriginFocused(false), 200)}
+                    className={errors.origin ? 'border-red-300' : ''}
+                  />
+                  {isOriginLoading && (
+                    <Loader2 className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 animate-spin text-muted-foreground" />
+                  )}
+                </div>
                 {isOriginFocused && originSuggestions.length > 0 && (
                   <ul className="absolute z-10 bg-white border rounded-md mt-1 w-full max-h-40 overflow-y-auto shadow-md">
                     {originSuggestions.map((suggestion) => (
@@ -183,18 +202,23 @@ const Home: React.FC = () => {
                   <Plane className="h-4 w-4 -rotate-45 text-muted-foreground" />
                   <label htmlFor="destination" className="text-sm font-medium">Destination</label>
                 </div>
-                <Input
-                  id="destination"
-                  placeholder="Enter destination city or airport (e.g., Bangkok)"
-                  value={destination}
-                  onChange={(e) => {
-                    setDestination(e.target.value);
-                    setSelectedDestinationIata(null);
-                  }}
-                  onFocus={() => setIsDestinationFocused(true)}
-                  onBlur={() => setTimeout(() => setIsDestinationFocused(false), 200)}
-                  className={errors.destination ? 'border-red-300' : ''}
-                />
+                <div className="relative">
+                  <Input
+                    id="destination"
+                    placeholder="Enter destination city or airport (e.g., Bangkok)"
+                    value={destination}
+                    onChange={(e) => {
+                      setDestination(e.target.value);
+                      setSelectedDestinationIata(null);
+                    }}
+                    onFocus={() => setIsDestinationFocused(true)}
+                    onBlur={() => setTimeout(() => setIsDestinationFocused(false), 200)}
+                    className={errors.destination ? 'border-red-300' : ''}
+                  />
+                  {isDestinationLoading && (
+                    <Loader2 className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 animate-spin text-muted-foreground" />
+                  )}
+                </div>
                 {isDestinationFocused && destinationSuggestions.length > 0 && (
                   <ul className="absolute z-10 bg-white border rounded-md mt-1 w-full max-h-40 overflow-y-auto shadow-md">
                     {destinationSuggestions.map((suggestion) => (
@@ -217,7 +241,7 @@ const Home: React.FC = () => {
                   <CalendarIcon className="h-4 w-4 text-muted-foreground" />
                   <label htmlFor="departureDate" className="text-sm font-medium">Departure Date</label>
                 </div>
-                <Popover>
+                <Popover open={isDeparturePopoverOpen} onOpenChange={setIsDeparturePopoverOpen}>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
@@ -232,7 +256,10 @@ const Home: React.FC = () => {
                     <Calendar
                       mode="single"
                       selected={departureDate}
-                      onSelect={setDepartureDate}
+                      onSelect={(date) => {
+                        setDepartureDate(date);
+                        setIsDeparturePopoverOpen(false); // Close on selection
+                      }}
                       disabled={(date) => date < new Date()}
                       initialFocus
                     />
@@ -246,7 +273,7 @@ const Home: React.FC = () => {
                   <CalendarIcon className="h-4 w-4 text-muted-foreground" />
                   <label htmlFor="returnDate" className="text-sm font-medium">Return Date</label>
                 </div>
-                <Popover>
+                <Popover open={isReturnPopoverOpen} onOpenChange={setIsReturnPopoverOpen}>
                   <PopoverTrigger asChild>
                     <Button
                       variant="outline"
@@ -261,7 +288,10 @@ const Home: React.FC = () => {
                     <Calendar
                       mode="single"
                       selected={returnDate}
-                      onSelect={setReturnDate}
+                      onSelect={(date) => {
+                        setReturnDate(date);
+                        setIsReturnPopoverOpen(false); // Close on selection
+                      }}
                       disabled={(date) => date < new Date() || (departureDate && date < departureDate)}
                       initialFocus
                     />
