@@ -3,62 +3,509 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CatPhotoApp</title>
+    <title>100 Days of Code - Temitope Alabi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .content-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .phase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .phase-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .phase-title {
+            font-size: 1.3rem;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .phase-days {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tech-tag {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .projects-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .projects-list li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .projects-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            margin: 30px 0;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255,255,255,0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tech-item {
+            text-align: center;
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .tech-percentage {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .tech-name {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: white;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px solid white;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .stats {
+                gap: 20px;
+            }
+
+            .stat-box {
+                padding: 15px 20px;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .phase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <main>
-  <h1>CatPhotoApp</h1>
-      <section>
-        <h2>Cat Photos</h2>
-        <!-- TODO: Add link to cat photos -->
-         <p>See more <a target="_blank" href="https://freecatphotoapp.com">cat photos</a> in our gallery.</p>
-         <a href="https://freecatphotoapp.com"><img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="A cute orange cat lying on its back."/></a>
-      </section>
-      <section>
-        <h2>Cat Lists</h2>
-        <h3>Things cats love:</h3>
-        <ul>
-          <li>cat nip</li>
-          <li>laser pointers</li>
-          <li>lasagna</li>
-        </ul>
-        <figure>
-        <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/lasagna.jpg" alt="A slice of lasagna on a plate.">
-        <figcaption>Cats <em>love</em> lasagna.</figcaption>
-        </figure>
-        <h3>Top 3 things cats hate:</h3>
-        <ol>
-          <li>flea treatment</li>
-          <li>thunder</li>
-          <li>other cats</li>
-        </ol>
-        <figure>
-        <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/cats.jpg" alt="Five cats sitting on a table.">
-        <figcaption>Cats are cute, but not very <em>smart</em>.</figcaption>
-        </figure>
-        </section>
-        <section>
-           <h2>Cat Form</h2>
-           <form action="https://freecatphotoapp.com/submit-cat-photo">
-            <fieldset>
-                <legend>Is your cat an indoor or outdoor cat?</legend>
-                <label for="indoor"><input id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked> Indoor</label>
-                <label for="outdoor"><input id="outdoor" type="radio" name="indoor-outdoor" value="outdoor"> Outdoor</label>
-            </fieldset>
-            <fieldset>
-              <legend>What's your cat's personality?</legend>
-              <label for="loving"><input id="loving" type="checkbox" name="personality" value="loving" checked> Loving</label>
-              <label for="lazy"><input id="lazy" type="checkbox" name="personality" value="lazy"> Lazy</label>
-              <label for="energetic"><input id="energetic" type="checkbox" name="personality" value="energetic"> Energetic</label>
-            </fieldset>
-            <input type="text" name="catphotourl" placeholder="cat photo URL" required>
-            <button type="submit">Submit</button>
-           </form> 
-           <footer>
-             <p> No Copyright - <a href="#">TopTech</a></p>
-           </footer>
-        </section>
-    </main>
-    
+    <div class="container">
+        <header>
+            <h1>💻 100 Days of Code</h1>
+            <p class="subtitle">A Full-Stack Development Journey by Temitope Alabi</p>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="stat-number">100</span>
+                    <span class="stat-label">Days Completed</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">44+</span>
+                    <span class="stat-label">Projects Built</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">300+</span>
+                    <span class="stat-label">Hours Coded</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">10,000+</span>
+                    <span class="stat-label">Lines of Code</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-section">
+            <h2>🎯 Mission Statement</h2>
+            <p><strong>Started:</strong> September 6, 2024</p>
+            <p><strong>Commitment:</strong> Code and learn every single day for 100 days</p>
+            <p><strong>Goal:</strong> Transform from beginner to full-stack developer through consistent, project-based learning</p>
+            <blockquote style="margin-top: 20px; padding: 20px; background: #f5f7fa; border-left: 4px solid #667eea; font-style: italic;">
+                "The journey of a thousand miles begins with a single step. This is my journey from HTML basics to full-stack applications."
+            </blockquote>
+        </div>
+
+        <div class="content-section">
+            <h2>🛠️ Technologies Mastered</h2>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <div class="tech-percentage">30.5%</div>
+                    <div class="tech-name">TypeScript</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-percentage">25.9%</div>
+                    <div class="tech-name">CSS</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-percentage">22.6%</div>
+                    <div class="tech-name">HTML</div>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-percentage">19.8%</div>
+                    <div class="tech-name">JavaScript</div>
+                </div>
+            </div>
+            <div class="tech-tags" style="margin-top: 30px; justify-content: center;">
+                <span class="tech-tag">React.js</span>
+                <span class="tech-tag">Next.js</span>
+                <span class="tech-tag">TypeScript</span>
+                <span class="tech-tag">Tailwind CSS</span>
+                <span class="tech-tag">Git & GitHub</span>
+                <span class="tech-tag">Vercel</span>
+                <span class="tech-tag">Chrome Extensions</span>
+                <span class="tech-tag">REST APIs</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>📚 Learning Journey</h2>
+            <div class="phase-grid">
+                <div class="phase-card">
+                    <div class="phase-title">Phase 1: Fundamentals</div>
+                    <div class="phase-days">Days 1-25</div>
+                    <p><strong>Mastered:</strong> Semantic HTML, CSS Box Model, Flexbox, Grid, Responsive Design, CSS Animations</p>
+                    <ul class="projects-list">
+                        <li>Tribute Page</li>
+                        <li>Cafe Menu</li>
+                        <li>Registration Form</li>
+                        <li>Magazine Layout</li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-title">Phase 2: JavaScript Essentials</div>
+                    <div class="phase-days">Days 26-50</div>
+                    <p><strong>Mastered:</strong> Variables, Functions, Arrays, Objects, DOM Manipulation, Event Handling, Local Storage</p>
+                    <ul class="projects-list">
+                        <li>Passenger Counter App</li>
+                        <li>Blackjack Game</li>
+                        <li>Role-Playing Game</li>
+                        <li>Calorie Counter</li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">JavaScript ES6+</span>
+                        <span class="tech-tag">DOM API</span>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-title">Phase 3: Advanced JavaScript</div>
+                    <div class="phase-days">Days 51-75</div>
+                    <p><strong>Mastered:</strong> Async/Await, API Integration, Chrome Extensions, Error Handling, Modern JS Features</p>
+                    <ul class="projects-list">
+                        <li>Leads Tracker Extension</li>
+                        <li>Weather App with API</li>
+                        <li>Todo List App</li>
+                        <li>Music Player</li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Fetch API</span>
+                        <span class="tech-tag">Chrome API</span>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-title">Phase 4: React & Modern Dev</div>
+                    <div class="phase-days">Days 76-100</div>
+                    <p><strong>Mastered:</strong> React Components, Hooks, State Management, Responsive Design, Vercel Deployment</p>
+                    <ul class="projects-list">
+                        <li>React Portfolio</li>
+                        <li>Task Manager App</li>
+                        <li>E-commerce Components</li>
+                        <li>API-driven Apps</li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React 19</span>
+                        <span class="tech-tag">TypeScript</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>🏆 Featured Projects</h2>
+            <div class="phase-grid">
+                <div class="phase-card">
+                    <div class="phase-title">Chrome Extension - Leads Tracker</div>
+                    <p>Save and manage important links with one click. Built with JavaScript, Chrome API, and Local Storage.</p>
+                    <p style="margin-top: 10px;"><strong>Learning:</strong> Browser extension development, localStorage API</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Chrome API</span>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-title">Role-Playing Game</div>
+                    <p>Text-based RPG with combat system demonstrating OOP principles and game logic.</p>
+                    <p style="margin-top: 10px;"><strong>Learning:</strong> Object-oriented programming, state management</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">OOP</span>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-title">Weather App</div>
+                    <p>Real-time weather data for any city using OpenWeather API with async/await patterns.</p>
+                    <p style="margin-top: 10px;"><strong>Learning:</strong> API integration, async/await, error handling</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Fetch API</span>
+                    </div>
+                </div>
+
+                <div class="phase-card">
+                    <div class="phase-title">React Portfolio Website</div>
+                    <p>Personal portfolio showcasing all projects with responsive design and TypeScript.</p>
+                    <p style="margin-top: 10px;"><strong>Learning:</strong> React fundamentals, component architecture</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TypeScript</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>💡 Key Learnings</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 10px;">Technical Skills</h3>
+                    <ul style="list-style-position: inside;">
+                        <li>Semantic HTML improves accessibility and SEO</li>
+                        <li>Flexbox and Grid solve 90% of layout problems</li>
+                        <li>Understanding the event loop is crucial</li>
+                        <li>Most apps need external data sources</li>
+                        <li>Component thinking changes how you build UIs</li>
+                        <li>Version control is essential for any project</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: #667eea; margin-bottom: 10px;">Soft Skills</h3>
+                    <ul style="list-style-position: inside;">
+                        <li>Consistency: Daily coding builds momentum</li>
+                        <li>Debugging: 80% of coding is fixing bugs</li>
+                        <li>Documentation: Future you will thank you</li>
+                        <li>Community: Learning with others accelerates growth</li>
+                        <li>Patience: Complex concepts take time</li>
+                        <li>Persistence: Stuck doesn't equal failure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 style="color: white; border: none;">🎯 Challenge Completed! What's Next?</h2>
+            <p style="font-size: 1.2rem; margin-top: 15px;">From HTML basics to production-ready applications in 100 days</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/toptech5419/100-days-of-code" class="btn btn-primary" target="_blank">View on GitHub</a>
+                <a href="https://github.com/toptech5419" class="btn btn-secondary" target="_blank">More Projects</a>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Temitope Alabi</strong> - Full-Stack Developer in Training</p>
+            <p style="margin-top: 10px;">
+                <a href="https://github.com/toptech5419" target="_blank">GitHub</a> |
+                <a href="https://linkedin.com/in/toptech5419" target="_blank">LinkedIn</a> |
+                <a href="mailto:alabitemitope51@gmail.com">Email</a>
+            </p>
+            <p style="margin-top: 20px; opacity: 0.9;">MSc Computer Science @ University of Lincoln | Open to Junior/Mid-Level Full-Stack Roles</p>
+            <p style="margin-top: 20px; font-size: 0.9rem;">Keep coding. Keep learning. Keep building. 🚀</p>
+        </footer>
+    </div>
 </body>
 </html>
