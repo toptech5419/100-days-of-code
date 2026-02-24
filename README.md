@@ -376,23 +376,24 @@ graph LR
 ## 🚀 What's Next?
 
 ### Short-Term Goals (Next 30 Days)
-- [ ] Complete Advanced React course
-- [ ] Build full-stack MERN application
-- [ ] Learn TypeScript deeply
+- [x] Complete Advanced React course
+- [x] Learn TypeScript deeply
+- [x] Build and deploy a full-stack application
 - [ ] Contribute to open source
-- [ ] Complete 10 coding challenges daily
+- [ ] Land a software engineering internship
 
 ### Long-Term Goals (6 Months)
-- [ ] Master Next.js
-- [ ] Learn backend with Node.js and Express
-- [ ] Master MongoDB and PostgreSQL
-- [ ] Build and deploy 5 production apps
-- [ ] Land first developer role
+- [x] Master Next.js
+- [x] Learn backend with Node.js and Express
+- [x] Master PostgreSQL
+- [x] Build and deploy production apps
+- [ ] Land first developer role / internship
 
 ### Skills to Learn
-- [ ] Next.js (SSR, ISR, SSG)
-- [ ] Node.js & Express.js
-- [ ] MongoDB & PostgreSQL
+- [x] Next.js (SSR, ISR, SSG, App Router)
+- [x] Node.js & Express.js
+- [x] PostgreSQL
+- [x] TypeScript (strict mode)
 - [ ] GraphQL
 - [ ] Testing (Jest, React Testing Library)
 - [ ] CI/CD pipelines
@@ -468,7 +469,7 @@ This project and all code within is open source under the MIT License. Feel free
 ## 👨‍💻 Author
 
 **Temitope Alabi**
-*Full-Stack Developer in Training*
+*Full-Stack Developer*
 
 - 🌐 GitHub: [@toptech5419](https://github.com/toptech5419)
 - 💼 LinkedIn: [toptech5419](https://linkedin.com/in/toptech5419)
@@ -477,7 +478,7 @@ This project and all code within is open source under the MIT License. Feel free
 
 ### Current Status
 - 🎓 MSc Computer Science @ University of Lincoln
-- 💻 Open to junior/mid-level full-stack roles
+- 💻 Building production apps — open to internship and junior roles
 - 🌍 Based in Lincoln, UK | Open to remote work
 
 ---
